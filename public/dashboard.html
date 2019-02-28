@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abacus Express User Dashboard</title><!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Node Abacus Dashboard</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+
+
+<!-- WELCOME BANNER  -->
+<section class="hero is-info is-medium has-text-centered">
+<div class="hero-body">
+<div class="container">
+<h1 class="title is-size-2 is-spaced"><strong>Isaac's </strong>Dashboard</h1>
+<a href="#" class="button is-medium is-info is-inverted is-outlined" id="logoutBtn">Logout</a>
+<a href="#" class="button is-medium is-info is-inverted is-outlined" id="deleteAccountBtn">Delete account</a>
+
+</div>
+</div>
+</section>
+
+<!-- SUMMARY HEADER -->
+<section id="about" class="hero is-light has-text-centered">
+<div class="hero-body">
+<div class="container">
+<h1 id="summaryTitle"class="title is-size-2">Summary</h1>
+<div class="columns">
+<div class="column is-one-quarter has-background-grey has-text-white">
+<p class="heading is-size-6 has-text-weight-bold ">Monthly income</p>
+<p class="title has-text-white">£2500</p>
+</div>
+<div class="column is-one-quarter has-background-primary has-text-white">
+<p class="heading is-size-6 has-text-weight-bold ">Regular expenses</p>
+<p class="title has-text-white">£1500</p>
+</div>
+<div class="column is-one-quarter has-background-danger has-text-white">
+<p class="heading is-size-6 has-text-weight-bold ">Remaining</p>
+<p class="title has-text-white">£1000</p>
+</div>
+<div class="column is-one-quarter has-background-link has-text-white">
+<p class="heading is-size-6 has-text-weight-bold ">Budgeting goal</p>
+<p class="title has-text-white">£300</p>
+
+</div>
+</div> 
+</div>
+</div>
+</section>
+
+<section class="hero has-background-grey">
+<div class="hero-body">
+<div class="container">
+<h1 class="title has-text-white">Monthly Income</h1>
+
+
+<table class="table is-hoverable has-text-centered">
+<thead class="is-size-5 has-background-link">
+<th class="has-text-white">Source</th>
+<th class="has-text-white">Amount</th>
+</thead>
+<tbody id="incomeTableBody">
+<tr class="is-striped is-bordered">
+<th contenteditable="true">Salary</th>
+<th contenteditable="true">£2000</th>
+</tr>
+
+<tr>
+<th contenteditable="true">Investment   </th>
+<th contenteditable="true">£100</th>
+
+</tr>
+
+<tr>
+<th contenteditable="true">Rent from flat</th>
+<th contenteditable="true">£400</th>
+</tr>
+
+</tbody>
+</table>
+
+<div class="field">
+<div class="control">
+<button id="addIncomeTableRowBtn" class="button is-inverted is-outlined">
+<p class="addBtn">ADD ROW</p><br>
+<i class="fas fa-plus-square"></i>
+</button>
+<button id="removeIncomeRow" class="button is-inverted is-outlined">
+    <p class="addBtn">REMOVE LAST ROW</p><br>
+    <i class="fas fa-minus-square"></i>
+    </button>
+</div>
+</div>
+
+
+<a href="#" class="button is-medium is-info is-inverted is-outlined has-text-weight-bold" id="updateIncome">Update</a>
+
+</div>
+</div>
+</section>
+
+
+<section class="hero has-background-primary">
+<div class="hero-body">
+<div class="container">
+<h1 class="title has-text-white">Regular Expenses</h1>
+
+<table class="table is-hoverable has-text-centered">
+<thead class="is-size-5 has-background-link">
+<th class="has-text-white">Outgoing</th>
+<th class="has-text-white">Amount</th>
+</thead>
+<tbody id="expenseTableBody">
+<tr class="is-striped is-bordered">
+<th contenteditable="true">Morgage</th>
+<th contenteditable="true">£1000</th>
+</tr>
+
+<tr>
+<th contenteditable="true">Electric   </th>
+<th contenteditable="true">£100</th>
+
+</tr>
+
+<tr>
+<th contenteditable="true">Phone Bill</th>
+<th contenteditable="true">£30</th>
+</tr>
+
+<tr>
+<th contenteditable="true">Phone Bill</th>
+<th contenteditable="true">£30</th>
+</tr>
+
+</tbody>
+</table>
+<div class="field">
+<div class="control">
+<button id="addExpenseTableRowBtn" class="button is-inverted is-outlined">
+<p class="addBtn">ADD</p><br>
+<i class="fas fa-plus-square"></i>
+</button>
+</div>
+</div>
+
+<a href="#" class="button is-medium is-info is-inverted is-outlined has-text-weight-bold" id="updateExpenses">Update</a>
+
+</div>
+</div>
+</section>
+
+
+
+<section class="hero is-info has-text-centered">
+<div class="hero-body">
+<div class="container">
+<h1 class="title is-size-1">Budgeting goal<span id="gapBetweenDashGoal"></span>£<strong id="budgetAmount" contenteditable="true">300</strong></h1>
+<br>
+<a href="#" class="button is-medium is-info has-text-weight-bold is-inverted is-outlined" id="updateGoal">
+Update</a>
+
+
+
+</div>
+</div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer role="footer" class="footer has-background-grey">
+<div class="content has-text-centered has-text-white has-text-weight-bold is-size-4">
+<p>created by Adam Duggan</p>
+<a target="_blank" href="https://github.com/AdamJDuggan" class="button is-large has-background-grey">
+<span class="icon is-medium has-text-white has-background-grey">
+<i class="fab fa-github"></i>
+</span>
+</a>
+<a href="mailto:adamduggan17@gmail.com" class="button is-large has-background-grey">
+<span class="icon is-medium has-text-white has-background-grey">
+<i class="item fa fa-envelope"></i>
+</span>
+</a>
+<a href="https://www.linkedin.com/in/adam-duggan-a8948a178/?originalSubdomain=uk" class="button is-large has-background-grey">
+<span class="icon is-medium has-text-white has-background-grey">
+<i class="fab fa-linkedin-in"></i>
+</span>
+</a>
+</div>
+</footer>
+
+
+<script src="dashboard.js"></script>
+</body>
+
+</html>

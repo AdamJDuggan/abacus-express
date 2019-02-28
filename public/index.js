@@ -1,0 +1,115 @@
+// *****************************************************************
+// LANDING PAGE JS 
+// *****************************************************************
+
+
+// LOGIN PAGE DISPLAY DIV ELEMENTS 
+function showLogin() {
+    $('#loginBtn').on('click', event => {
+        event.preventDefault();
+        $('#register').hide();
+        $('#login').toggle();
+    })
+};
+// REG DIV DISPLAY DIV ELEMENT 
+function showRegister() {
+    $('#registerBtn').on('click', event => {
+        event.preventDefault();
+        $('#login').hide();
+        $('#register').toggle();
+    })
+};
+
+// WRAPPER FOR ABOVE STYLE DISPLAY TOGGLES 
+function divDisplayWrapper() {
+    showLogin();
+    showRegister();
+}
+// -------------------------------------------------------------------------------------------------------------------
+
+
+// *****************************************************************
+// REGISTRATION FORM 
+// *****************************************************************
+function watchRegisterFormSubmit() {
+
+    $('#regForm').submit(function (e) {
+        // Prevent dedault form behaviour 
+        e.preventDefault();
+        let user = {
+            email: $('#registerEmail').val(),
+            password: $('#registerPassword').val(),
+            password2: $('#registerPassword2').val(),
+        }
+
+        let options = {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify(user)
+        }
+
+        fetch('/user/register', options)
+            .then(response => {
+                return response.json()
+            })
+            .then(user => {
+                console.log(user);
+                localStorage.setItem("user", JSON.stringify(user));
+                window.location = 'setup.html';                
+            })
+            .catch(err => {console.error('Error:', err)});
+    })
+};
+
+// -------------------------------------------------------------------------------------------------------------------
+
+// *****************************************************************
+// LOGIN FORM 
+// *****************************************************************
+function watchLoginFormSubmit() {
+
+    $('#loginForm').submit(function (e) {
+        // Prevent dedault form behaviour 
+        e.preventDefault();
+        let user = {
+            email: $('#loginEmail').val(),
+            password: $('#loginPassword').val(),
+        }
+
+        let options = {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({user})
+        }
+
+        fetch('/user/login', options)
+            .then(response => {
+                return response.json()
+            })
+            .then(user => {
+                localStorage.setItem("user", JSON.stringify(user.email));
+                window.location = 'dashboard.html';                
+            })
+            .catch(err => console.error('Error:', err));
+    })
+};
+
+
+// -------------------------------------------------------------------------------------------------------------------
+
+
+
+// *****************************************************************
+// WRAPPER FUNCTION  
+// *****************************************************************
+function indexWrapperFunction() {
+    divDisplayWrapper();
+    watchRegisterFormSubmit();
+    watchLoginFormSubmit();
+}
+
+$(indexWrapperFunction());

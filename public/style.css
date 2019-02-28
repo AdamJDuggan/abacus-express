@@ -1,0 +1,65 @@
+/* HIDE LOGIN AND REGISTER DIVS ON LOGIN SCREEN */
+#login{display:none;}
+#register{display:none;}
+
+.loginHeadBtns,
+#updateGoal {
+    margin: 14px;
+}
+
+input{max-width: 200px;}
+
+#aboutTitle,
+#registrationHeading{
+    margin-bottom: 30px;
+}
+
+.input{max-width: 350px;}
+
+.column{border-radius: 5%; margin: 4px;}
+
+.message{width: 200px; height: 100px;};
+
+.list-item {max-width: 100px;}
+
+#updateIncome,
+#updateExpenses{
+    margin-top: 30px;
+}
+
+.addBtn{margin-right: 12px;}
+
+#incomeSourceInput{margin-right: 15px;}
+
+.loginSummaryBtn{min-width: 100px; margin: 10px; padding: 5px;}
+
+#loginBudgetGoalheading{margin-bottom: 30px;}
+
+#loginBudgetGoalSubHeading{margin-bottom: 40px;}
+
+#loginBudgetingGoalSection,
+#loginSetupFinalSubmit {
+    display: none;
+}
+
+#abacusImg{
+    width: 100px;
+    height: 100px;
+    color: white;
+    margin-bottom: 12px;    
+}
+
+.table{width: 70%;}
+
+#tablebody{font-weight: 300;}
+
+#summaryTitle{margin-bottom: 55px;}
+
+#gapBetweenDashGoal{margin-right: 25px;}
+
+#matchMsg,
+#emailTypeMsg
+#alreadyExistsMsg {
+    display : none;
+}
+

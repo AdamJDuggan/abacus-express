@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abacus Express login</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+
+<!-- LANDING BANNER -->
+<section class="hero is-info is-large has-text-centered">
+<div class="hero-body">
+<div class="container">
+<!-- <img id="abacusImg" src="abacus.png" alt=""> -->
+<h1 class="title is-size-2 is-spaced">Abacus Express</h1>
+<h2 class="subtitle is-spaced is-size-4">Secure web application for stewarding personal finances</h2>
+<a class="button is-medium is-info is-inverted is-outlined loginHeadBtns" id="loginBtn">Login</a>
+<a class="button is-medium is-info is-inverted is-outlined loginHeadBtns" id="registerBtn">Register</a>
+<!-- <a class="button is-medium is-info is-inverted is-outlined loginHeadBtns" id="trialBtn">Trial dummy account</a> -->
+</div>
+</div>
+</section>
+
+
+<!-- LOG IN SECTION-->
+<section id="login" class="hero is-small is-light is-bold">
+<div class="hero-body">
+<div class="container">
+<h1 class="title is-size-2">Log in</h1>
+<form id="loginForm">
+<div class="field">
+<label class="label">Email</label>
+<div class="control has-icons-left ">
+<input class="input" type="email" id="loginEmail" placeholder="Enter your email or a username ">
+<span class="icon is-small is-left">
+<i class="fas fa-user"></i>
+</span>
+</div>
+<p id="emailTypeMsg" class="help is-danger">You must enter a valid email address</p>
+</div>
+<div class="field">
+<label class="label">Password</label>
+<div class="control has-icons-left has-icons-right">
+<input class="input" type="password" id= "loginPassword" placeholder="Enter your email address as a username">
+<span class="icon is-small is-left">
+<i class="fas fa-lock"></i></span>
+</div>
+</div>
+<div class="field">
+<div class="control">
+<button class="button is-large has-text-weight-bold is-link">Log in</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</section>
+
+<!-- REGISTERATION SECTION -->
+<section id="register" class="hero is-small is-light is-bold">
+<div class="hero-body">
+<div class="container">
+<h1 class="title is-size-2">Register an account below</h1>
+<form id="regForm">
+<div class="field">
+<label class="label">Email</label>
+<div class="control has-icons-left ">
+<input class="input" type="email" id="registerEmail" placeholder="Enter your email address as a username ">
+<span class="icon is-small is-left">
+<i class="fas fa-user"></i>
+</span>
+</div>
+</div>
+<div class="field">
+<label class="label">Password</label>
+<div class="control has-icons-left has-icons-right">
+<input class="input" type="password" id="registerPassword" placeholder="Enter your password">
+<span class="icon is-small is-left">
+<i class="fas fa-lock"></i></span>
+</div>
+</div>
+<div class="field">
+<label class="label">Confirm password</label>
+<div class="control has-icons-left has-icons-right">
+<input class="input" type="password" id="registerPassword2" placeholder="">
+<span class="icon is-small is-left">
+<i class="fas fa-lock"></i></span>
+</div>
+</div>
+<div class="field">
+<div class="control">
+<button class="button is-large has-text-weight-bold is-link">Create account</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="hero has-text-centered">
+<div class="hero-body">
+<div class="container">
+<h1 id="aboutTitle" class="title">About</h1>
+<p class="is-size-5">
+This responsive web application was built with Express, Node.js and MongoDB. Login is authenticated 
+securely with Passport.js and Json web tokens. I have created a copy of the application with vanilla CSS; designed from scratch with flexbox instead of frameworks!
+Please <strong><a href="">Click here</a></strong> to view this version.
+</p>
+</div>
+</div>
+</section>
+
+<footer role="footer" class="footer has-background-grey">
+<div class="content has-text-centered has-text-white has-text-weight-bold is-size-4">
+<p>created by Adam Duggan</p>
+<a target="_blank" href="https://github.com/AdamJDuggan" class="button is-large has-background-grey">
+<span class="icon is-medium has-text-white has-background-grey">
+<i class="fab fa-github"></i>
+</span>
+</a>
+<a href="mailto:adamduggan17@gmail.com" class="button is-large has-background-grey">
+<span class="icon is-medium has-text-white has-background-grey">
+<i class="item fa fa-envelope"></i>
+</span>
+</a>
+<a href="https://www.linkedin.com/in/adam-duggan-a8948a178/?originalSubdomain=uk" class="button is-large has-background-grey">
+<span class="icon is-medium has-text-white has-background-grey">
+<i class="fab fa-linkedin-in"></i>
+</span>
+</a>
+</div>
+</footer>
+
+<script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>

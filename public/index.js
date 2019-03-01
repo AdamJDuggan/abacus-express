@@ -37,7 +37,7 @@ function watchRegisterFormSubmit() {
         // Prevent dedault form behaviour 
         e.preventDefault();
         let user = {
-            email: $('#registerEmail').val(),
+            username: $('#registerEmail').val(),
             password: $('#registerPassword').val(),
             password2: $('#registerPassword2').val(),
         }

@@ -3,11 +3,12 @@ const express = require('express');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 const config = require('../config');
 const router = express.Router();
 
-const User = require('../users/models');
+const {User} = require('../users/models');
 
 const createAuthToken = function(user) {
   return jwt.sign({user}, config.JWT_SECRET, {
@@ -19,9 +20,7 @@ const createAuthToken = function(user) {
 
 const localAuth = passport.authenticate('local', {session: false});
 
-router.use(bodyParser.urlencoded({
-  extended: true
-}));
+
 router.use(bodyParser.json());
 
 
@@ -40,15 +39,15 @@ router.post('/refresh', jwtAuth, (req, res) => {
 });
 
 
-router.post('/register', bodyParser, (req, res) => {
+router.post('/register', (req, res) => {
 
   console.log('infomation sent from reg form');
-  const {email, password, password2} = req.body;
+  const {username, password, password2} = req.body;
 
   // Validation
   let errors = [];
   //check requird fields
-  if(!email || !password || !password2){errors.push({msg: 'Please fill in all fields'});
+  if(!username || !password || !password2){errors.push({msg: 'Please fill in all fields'});
   }
   // check passwords match
   if(password !== password2){errors.push({msg: "Passwords do not match"})}
@@ -59,14 +58,15 @@ router.post('/register', bodyParser, (req, res) => {
   
   else{
   // Check DB for existing user
-    User.find({email: email})
+    User.find({username: username})
     .then(user => {
-        if(user){console.log('email already registered. I want this to show on screen')} 
+      console.log(user)
+        if(user.length > 0){console.log('username already registered. I want this to show on screen')} 
       // Create new user 
         else {
               // I have a model and I am here creating a new instance
               // HERE
-              const newUser = new User({email, password});
+              const newUser = new User({username, password});
               // Hash password before saving to DB. Generate a salt so we can create a hash 
               //takes number of keys as argument
               bcrypt.genSalt(10, (err, salt) => 
@@ -79,11 +79,10 @@ router.post('/register', bodyParser, (req, res) => {
                     if(err){console.log(err)}
                     else{
                       console.log('User added to db')
-                      const authToken = createAuthToken(req.email);
+                      const authToken = createAuthToken(newUser.username);
                       res.json({authToken});
                     }
                   })
-                  
                 })  
               )
           }

@@ -1,17 +1,40 @@
-// 'use strict';
-// global.DATABASE_URL = 'mongodb://localhost/jwt-auth-demo-test';
-// const chai = require('chai');
-// const chaiHttp = require('chai-http');
+'use strict';
+global.DATABASE_URL = 'mongodb://localhost/jwt-auth-demo-test';
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 
-// const {app, runServer, closeServer} = require('../server');
-// const {User} = require('../users');
+const {app, runServer, closeServer} = require('../server');
+const {User} = require('../users');
 
-// const expect = chai.expect;
+const expect = chai.expect;
 
-// // This let's us make HTTP requests
-// // in our tests.
-// // see: https://github.com/chaijs/chai-http
-// chai.use(chaiHttp);
+chai.use(chaiHttp);
+
+  before(function() {
+    return runServer();
+  });
+
+  after(function() {
+    return closeServer();
+  });
+
+  beforeEach(function() {});
+
+  afterEach(function() {
+    return User.remove({});
+  });
+
+// Initial test to ensure basic files set up is configured
+describe('Hit URL', function() {
+  it('should return 202 and html on get', function(){
+      return chai.request(app)
+      .get('/api/users')
+      .then(function(res){
+          expect(res).to.have.status(200);
+          expect(res).to.be.html;
+      })
+  })
+});
 
 // describe('/api/user', function() {
 //   const username = 'exampleUser';
@@ -23,19 +46,6 @@
 //   const firstNameB = 'ExampleB';
 //   const lastNameB = 'UserB';
 
-//   before(function() {
-//     return runServer();
-//   });
-
-//   after(function() {
-//     return closeServer();
-//   });
-
-//   beforeEach(function() {});
-
-//   afterEach(function() {
-//     return User.remove({});
-//   });
 
 //   describe('/api/users', function() {
 //     describe('POST', function() {

@@ -7,6 +7,8 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const router = express.Router();
 
+const User = require('../users/models');
+
 const createAuthToken = function(user) {
   return jwt.sign({user}, config.JWT_SECRET, {
     subject: user.username,
@@ -16,7 +18,13 @@ const createAuthToken = function(user) {
 };
 
 const localAuth = passport.authenticate('local', {session: false});
+
+router.use(bodyParser.urlencoded({
+  extended: true
+}));
 router.use(bodyParser.json());
+
+
 // The user provides a username and password to login
 router.post('/login', localAuth, (req, res) => {
   const authToken = createAuthToken(req.user.serialize());
@@ -35,7 +43,7 @@ router.post('/refresh', jwtAuth, (req, res) => {
 router.post('/register', bodyParser, (req, res) => {
 
   console.log('infomation sent from reg form');
-  const {name, email, password, password2} = req.body;
+  const {email, password, password2} = req.body;
 
   // Validation
   let errors = [];
@@ -51,7 +59,7 @@ router.post('/register', bodyParser, (req, res) => {
   
   else{
   // Check DB for existing user
-    User.findOne({email: email})
+    User.find({email: email})
     .then(user => {
         if(user){console.log('email already registered. I want this to show on screen')} 
       // Create new user 

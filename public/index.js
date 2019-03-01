@@ -50,8 +50,9 @@ function watchRegisterFormSubmit() {
             body: JSON.stringify(user)
         }
 
-        fetch('/user/register', options)
+        fetch('api/auth/register', options)
             .then(response => {
+                console.log('Returned from server')
                 return response.json()
             })
             .then(user => {

@@ -15,162 +15,171 @@
 
 <!-- LANDING BANNER -->
 <section class="hero is-info is-medium has-text-centered">
-<div class="hero-body">
-<div class="container">
-<h1 class="title is-size-2 is-spaced">Enter your account details</h1>
-<a href="#login" class="button is-medium is-info is-inverted is-outlined" id="logoutBtn">Logout</a>
-</div>
-</div>
-</section>
-
-<!-- ADD INCOME SECTION -->
-<section id="incomeAndExpSec">
-<section class="hero is-light is-bold">
-<div class="hero-body">
-<div class="container">
-
-<section class="hero has-background-grey has-text-white">
-<div class="hero-body">
-<div class="container">
-<h1 class="title has-text-white">1. Add sources of monthly income</h1>
-<table class="table is-hoverable has-text-centered">
-<thead class="is-size-5 has-background-link">
-<th class="has-text-white">Source</th>
-<th class="has-text-white">Amount</th>
-<th></th>
-</thead>
-<tbody id="incomeTableBody">
-<tr class="">
-<th  ><input type="text" class="input incomeSource"></th>
-<th  ><input type="number" class="input incomeAmount"></th>
-</tr>
-
-
-</tbody>
-</table>
-
-<div class="field">
-<div class="control">
-<button id="addIncomeTableRowBtn" class="button is-inverted is-outlined">
-<p class="addBtn">ADD ROW</p><br>
-<i class="fas fa-plus-square"></i>
-</button>
-</div>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<section class="hero is-primary">
-<div class="hero-body">
-<div class="container">
-<h1 class="title">2. Add regular/essential monthly expenses</h1>
-<table class="table is-hoverable has-text-centered">
-<thead class="is-size-5 has-background-link">
-<th class="has-text-white">Source</th>
-<th class="has-text-white">Amount</th>
-<th></th>
-</thead>
-<tbody id="expenditureTableBody">
-<tr class="is-striped is-bordered">
-<th><input type="text" class="input expenseSource"></th>
-<th><input type="number" class="input expenseAmount"></th>
-</tr>
-
-
-</tbody>
-</table>
-
-<div class="field">
-<div class="control">
-<button id="addExpenditureTableRowBtn" class="button is-inverted is-outlined">
-<p class="addBtn">ADD ROW</p><br>
-<i class="fas fa-plus-square"></i>
-</button>
-</div>
-</div>
-
-
-</div>
-</div>
-</section>
-
-<section class="hero">
-<div class="hero-body">
-<div class="container">
-<a id="loginCalculateBtn" class="button is-large is-danger has-text-weight-bold">Calculate</a>
-</div>
-</div>
-</section>
-</section>
-
-</section>
-
-<!-- BUDGETING GOAL SECTION -->
-<section id="loginBudgetingGoalSection" class="hero is-info">
-<div class="hero-body">
-<div class="container">
-<h1 id="loginBudgetGoalheading" class="title">3. Set budgeting goal</h1>
-<h2 id="loginBudgetGoalSubHeading" class="subtitle">How much would you like to save each month?</h2>
-<!-- SUMMARY COLUMNS -->
-<div id="summarySection" class="columns">
-<!-- STRING INTERPOLATION OF CALCULATED VALUES FOR INCOME< EXPENCE AND BUDGET -->
-</div>
-
-<!-- INPUT BUDGETING GOAL AMMOUNT SECTION -->
-<div class="field">
-<div class="control has-icons-left">
-<input id="budgetGoalInput" class="input is-large" type="number" placeholder="Per month">
-<span class="icon is-left">
-<i class="far fa-money-bill-alt"></i>
-</span>
-</div>
-</div>
-
-</div>
-</div>
-</section>
-
-<!-- FINAL SUBMIT BUTTON -->
-<section id="loginSetupFinalSubmit" class="hero">
-<div class="hero-body">
-<div class="container">
-<a id="loginFinalSubmitBtn" class="button is-large is-info has-text-weight-bold">Create account</a>
-</div>
-</div>
-</section>
-
-
-
-
-</div>
-</div>
-
-
-
-<!-- FOOTER -->
-<footer role="footer" class="footer has-background-grey">
-<div class="content has-text-centered has-text-white has-text-weight-bold is-size-4">
-<p>created by Adam Duggan</p>
-<a target="_blank" href="https://github.com/AdamJDuggan" class="button is-large has-background-grey">
-<span class="icon is-medium has-text-white has-background-grey">
-<i class="fab fa-github"></i>
-</span>
-</a>
-<a href="mailto:adamduggan17@gmail.com" class="button is-large has-background-grey">
-<span class="icon is-medium has-text-white has-background-grey">
-<i class="item fa fa-envelope"></i>
-</span>
-</a>
-<a href="https://www.linkedin.com/in/adam-duggan-a8948a178/?originalSubdomain=uk" class="button is-large has-background-grey">
-<span class="icon is-medium has-text-white has-background-grey">
-<i class="fab fa-linkedin-in"></i>
-</span>
-</a>
-</div>
-</footer>
+        <div class="hero-body">
+        <div class="container">
+        <h1 class="title is-size-2 is-spaced">Enter your account details</h1>
+        <a href="#login" class="button is-medium is-info is-inverted is-outlined" id="logoutBtn">Logout</a>
+        </div>
+        </div>
+        </section>
+        
+        <!-- ADD INCOME SECTION -->
+        <section id="incomeAndExpSec">
+        <section class="hero is-light is-bold">
+        <div class="hero-body">
+        <div class="container">
+        
+        <section class="hero has-background-grey has-text-white">
+        <div class="hero-body">
+        <div class="container">
+        <h1 class="title has-text-white">1. Add sources of monthly income</h1>
+        <section id="incomeRowWrapper">
+        
+        <form class="incomeRow">
+        <div class="field-is-grouped">
+        <div class="field has-addons">
+        <p class="control"></p><a class="button is-static">Source</a></p>  
+        <p class="control"><input class="input incomeSource" type="text"></p>
+        <p class="control"><a class="button is-static">Amount</a></p>  
+        <p class="control"><input class="input incomeAmount" type="number"></p>
+        </div>
+        </div>
+        </form>
+        
+        </section>
+        <div class="field is-grouped">
+        <div class="control">
+        <button id="addIncomeTableRowBtn" class="button is-inverted is-outlined">
+        <p class="addBtn">ADD ROW</p><br>
+        <i class="fas fa-plus-square"></i>
+        </button>
+        </div>
+        <p class="control">
+        <button id="removeIncomeTableRowBtn" class="button is-inverted is-outlined">
+        <p class="addBtn">REMOVE LAST ROW</p><br>
+        <i class="fas fa-minus-square"></i>
+        </button>
+        </p>
+        </div>
+        
+        </div>
+        </div>
+        </section>
+        
+        <!-- ADD EXPENSES SECTION -->
+        <section class="hero is-primary has-text-white">
+        <div class="hero-body">
+        <div class="container">
+        <h1 class="title has-text-white">1. Add regular/essential monthly expenses</h1>
+        <section id="expenditureRowWrapper">
+        
+        <form class="expenseRow">
+        <div class="field-is-grouped">
+        <div class="field has-addons">
+        <p class="control"><a class="button is-static">Source</a></p>  
+        <p class="control"><input class="input expenseSource" type="text"></p>
+        <p class="control"><a class="button is-static">Amount</a></p>  
+        <p class="control"><input class="input expenseAmount" type="number"></p>
+        </div>
+        </div>  
+        </form>
+        
+        </section>
+        
+        <div class="field is-grouped">
+        <div class="control">
+        <button id="addExpenseTableRowBtn" class="button is-inverted is-outlined">
+        <p class="addBtn">ADD ROW</p><br>
+        <i class="fas fa-plus-square"></i>
+        </button>
+        </div>
+        <p class="control">
+        <button id="removeExpenseTableRowBtn" class="button is-inverted is-outlined">
+        <p class="addBtn">REMOVE LAST ROW</p><br>
+        <i class="fas fa-minus-square"></i>
+        </button>
+        </p>
+        </div>
+        
+        
+        </div>
+        </div>
+        </section>
+        
+        <section class="hero">
+        <div class="hero-body">
+        <div class="container">
+        <a id="loginCalculateBtn" class="button is-large is-danger has-text-weight-bold">Calculate</a>
+        </div>
+        </div>
+        </section>
+        </section>
+        
+        </section>
+        
+        <!-- BUDGETING GOAL SECTION -->
+        <section id="loginBudgetingGoalSection" class="hero is-info">
+        <div class="hero-body">
+        <div class="container">
+        <h1 id="loginBudgetGoalheading" class="title">3. Set budgeting goal</h1>
+        <h2 id="loginBudgetGoalSubHeading" class="subtitle">How much would you like to save each month?</h2>
+        <!-- SUMMARY COLUMNS -->
+        <div id="summarySection" class="columns">
+        <!-- STRING INTERPOLATION OF CALCULATED VALUES FOR INCOME< EXPENCE AND BUDGET -->
+        </div>
+        
+        <!-- INPUT BUDGETING GOAL AMMOUNT SECTION -->
+        <div class="field">
+        <div class="control has-icons-left">
+        <input id="budgetGoalInput" class="input is-large" type="number" placeholder="Per month">
+        <span class="icon is-left">
+        <i class="far fa-money-bill-alt"></i>
+        </span>
+        </div>
+        </div>
+        
+        </div>
+        </div>
+        </section>
+        
+        <!-- FINAL SUBMIT BUTTON -->
+        <section id="loginSetupFinalSubmit" class="hero">
+        <div class="hero-body">
+        <div class="container">
+        <a id="loginFinalSubmitBtn" class="button is-large is-info has-text-weight-bold">Create account</a>
+        </div>
+        </div>
+        </section>
+        
+        
+        
+        
+        </div>
+        </div>
+        
+        
+        
+        <!-- FOOTER -->
+        <footer role="footer" class="footer has-background-grey">
+        <div class="content has-text-centered has-text-white has-text-weight-bold is-size-4">
+        <p>created by Adam Duggan</p>
+        <a target="_blank" href="https://github.com/AdamJDuggan" class="button is-large has-background-grey">
+        <span class="icon is-medium has-text-white has-background-grey">
+        <i class="fab fa-github"></i>
+        </span>
+        </a>
+        <a href="mailto:adamduggan17@gmail.com" class="button is-large has-background-grey">
+        <span class="icon is-medium has-text-white has-background-grey">
+        <i class="item fa fa-envelope"></i>
+        </span>
+        </a>
+        <a href="https://www.linkedin.com/in/adam-duggan-a8948a178/?originalSubdomain=uk" class="button is-large has-background-grey">
+        <span class="icon is-medium has-text-white has-background-grey">
+        <i class="fab fa-linkedin-in"></i>
+        </span>
+        </a>
+        </div>
+        </footer>
 
 
 <script src="setup.js"></script>

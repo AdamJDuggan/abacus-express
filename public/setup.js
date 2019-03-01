@@ -5,29 +5,42 @@
 
 // ADD ROWS TO INCOME  TABLE (WHICH ARE PASSED IN AS ARGUMENTS IN initilize FUNCTION)
 function addRowToSetupIncome(btn, table){
-    $(btn).on('click', event => {
+    $('#addIncomeTableRowBtn').on('click', event => {
         event.preventDefault();
-        $(table).append(
-            `<tr>
-            <th><input type="text" class="input incomeSource"></th>
-            <th><input type="number" class="input incomeAmount"></th>
-            </tr>`
+        $('#incomeRowWrapper').append(
+            `<form class="incomeRow">
+            <div class="field-is-grouped">
+            <div class="field has-addons">
+            <p class="control"></p><a class="button is-static">Source</a></p>  
+            <p class="control"><input class="input incomeSource" type="text"></p>
+            <p class="control"><a class="button is-static">Amount</a></p>  
+            <p class="control"><input class="input incomeAmount" type="number"></p>
+            </div>
+            </div>
+            </form>`
         ) 
     })
 }
 
 // ADD ROW TO SETUP ACCOUNT EXPENSES TABLE 
-function addRowToSetupExpense(btn, table){
-    $(btn).on('click', event => {
+function addRowToSetupExpense(){
+    $('#addExpenseTableRowBtn').on('click', event => {
         event.preventDefault();
-        $(table).append(
-            `<tr>
-            <th><input type="text" class="input expenseSource"></th>
-            <th><input type="number" class="input expenseAmount"></th>
-            </tr>`
+        $('#expenditureRowWrapper').append(
+            `<form class="incomeRow">
+            <div class="field-is-grouped">
+            <div class="field has-addons">
+            <p class="control"></p><a class="button is-static">Source</a></p>  
+            <p class="control"><input class="input expenseSource" type="text"></p>
+            <p class="control"><a class="button is-static">Amount</a></p>  
+            <p class="control"><input class="input expenseAmount" type="number"></p>
+            </div>
+            </div>
+            </form>`
         ) 
     })
 }
+
 
 // SETUP PAGE REMOVE ROW WITH TRASH ICON FROM INCOME AND EXPENDITURE TABLE
 function removeRowFromSetupTable(btn, table){
@@ -127,7 +140,6 @@ function setGoalAndSubmit(){
                 return response.json()
             })
             .catch(err => console.error('Error:', err));
-    
     })
 }
 

@@ -75,7 +75,7 @@ function watchLoginFormSubmit() {
         // Prevent dedault form behaviour 
         e.preventDefault();
         let user = {
-            email: $('#loginEmail').val(),
+            username: $('#loginEmail').val(),
             password: $('#loginPassword').val(),
         }
 
@@ -87,12 +87,13 @@ function watchLoginFormSubmit() {
             body: JSON.stringify({user})
         }
 
-        fetch('/user/login', options)
+        fetch('/api/auth/login', options)
             .then(response => {
+                console.log('Returned from server')
                 return response.json()
             })
             .then(user => {
-                localStorage.setItem("user", JSON.stringify(user.email));
+                localStorage.setItem("user", JSON.stringify(user));
                 window.location = 'dashboard.html';                
             })
             .catch(err => console.error('Error:', err));

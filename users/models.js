@@ -8,12 +8,12 @@ const UserSchema = mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true
   },
   password: {
     type: String,
     required: true
   },
+  
   income: [
     {source: String, amount: Number}
   ],

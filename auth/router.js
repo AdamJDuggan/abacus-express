@@ -104,18 +104,19 @@ router.post('/register', (req, res) => {
 // Setup screen: Push income and expenditure to db  
 //---------------------------------------------------------------
 router.post('/setup1', (req, res) => {
-  const {user} = req.body;
-  console.log(user);
-  console.log(JSON.parse(req.body.user).authToken);
+  const {user, obj} = req.body;
+  console.log(req.body.obj);
+  // console.log(JSON.parse(req.body.user).authToken);
 
   jwt.verify(JSON.parse(req.body.user).authToken, 'myfirstapp', function(err, decoded){
     console.log(decoded.user);
     User.find({username: decoded.user})
     .then(user => {
-        if(!user){console.log('not matching')}
-        else(console.log('matched!'));
+        if(!user){console.log('not matching oon db')}
+        else(console.log('matched on db!'));
   })
 })
+  
   
 })
 

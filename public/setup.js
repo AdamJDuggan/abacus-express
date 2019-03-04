@@ -89,16 +89,22 @@ function postIncomeAndExp() {
     // User email for local storage 
     let user = localStorage.getItem('user');  
     // User income and expenses to be turned into objects to send to db
-    
+    let obj = {};   
+    $('.incomeRow').each(function() {
+        obj[ $(this).find('.incomeSource').val()] 
+        = $(this).find('.incomeAmount').val()
+    });
+
+    console.log(obj);
     // Make post to API 
     let options = {
         method: 'POST',
         headers: {
             "Content-Type": 'application/json'
         },
-        body: JSON.stringify({user})
+        body: JSON.stringify({user}, obj)
     }
-        console.log('From fetch in html: ' + user);
+        console.log('From fetch in html: ' + user + obj);
         fetch('/api/auth/setup1', options)
             .then(response => {
                 return response.json()

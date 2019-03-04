@@ -87,26 +87,27 @@ function calculateGoal(){
 // PUSH INCOME AND EXPENDITURE TO DB
 function postIncomeAndExp() {
     // User email for local storage 
-    let email = localStorage.getItem('user');  
-    
+    let user = localStorage.getItem('user');  
     // User income and expenses to be turned into objects to send to db
     
-
     // Make post to API 
     let options = {
         method: 'POST',
         headers: {
             "Content-Type": 'application/json'
         },
-        body: JSON.stringify({email})
+        body: JSON.stringify({user})
     }
-        console.log('From fetch in html: ' + email);
-        fetch('/user/firstpush', options)
+        console.log('From fetch in html: ' + user);
+        fetch('/api/auth/setup1', options)
             .then(response => {
                 return response.json()
             })
             .catch(err => console.error('Error:', err));
 };
+
+
+
 
 // CALCULATE BUDGET AND DISPLAY BUDGETING GOAL 
 function showBudgetingGoal() {

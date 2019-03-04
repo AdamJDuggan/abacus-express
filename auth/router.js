@@ -4,7 +4,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-
+const decode = require('jwt-decode');
 const config = require('../config');
 const router = express.Router();
 
@@ -23,8 +23,9 @@ const localAuth = passport.authenticate('local', {session: false});
 
 router.use(bodyParser.json());
 
-
+//-----------------------------------------------------
 // The user provides a username and password to login
+//-----------------------------------------------------
 router.post('/login', localAuth, (req, res) => {
   const authToken = createAuthToken(req.user.serialize());
   console.log("landed in auth router" + authToken)
@@ -40,6 +41,10 @@ router.post('/refresh', jwtAuth, (req, res) => {
 });
 
 
+//---------------------------------------------------------------
+// Registration form submit: validate, create new user on db and
+// move to setup account screen passing user id as jwt
+//---------------------------------------------------------------
 router.post('/register', (req, res) => {
 
   console.log('infomation sent from reg form');
@@ -91,5 +96,29 @@ router.post('/register', (req, res) => {
   }
 // END OF ROUTER POST TO SETUP ON REGISTRATION 
 });
+
+
+
+
+//---------------------------------------------------------------
+// Setup screen: Push income and expenditure to db  
+//---------------------------------------------------------------
+router.post('/setup1', (req, res) => {
+  const {user} = req.body;
+  console.log(user);
+  console.log(JSON.parse(req.body.user).authToken);
+
+  jwt.verify(JSON.parse(req.body.user).authToken, 'myfirstapp', function(err, decoded){
+    console.log(decoded.user);
+    User.find({username: decoded.user})
+    .then(user => {
+        if(!user){console.log('not matching')}
+        else(console.log('matched!'));
+  })
+})
+  
+})
+
+
 
 module.exports = {router};

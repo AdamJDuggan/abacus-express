@@ -13,8 +13,14 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
-  
+  },
+  income: [
+    {source: String, amount: Number}
+  ],
+  expenditure: [
+    {source: String, amount: Number}
+  ],
+  budgetingGoal: Number   
 });
 
 UserSchema.methods.serialize = function() {

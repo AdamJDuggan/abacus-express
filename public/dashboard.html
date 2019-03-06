@@ -60,122 +60,121 @@
 </div>
 </section>
 
-<section class="hero has-background-grey">
-<div class="hero-body">
-<div class="container">
-<h1 class="title has-text-white">Monthly Income</h1>
-
-
-<table class="table is-hoverable has-text-centered">
-<thead class="is-size-5 has-background-link">
-<th class="has-text-white">Source</th>
-<th class="has-text-white">Amount</th>
-</thead>
-<tbody id="incomeTableBody">
-<tr class="is-striped is-bordered">
-<th contenteditable="true">Salary</th>
-<th contenteditable="true">£2000</th>
-</tr>
-
-<tr>
-<th contenteditable="true">Investment   </th>
-<th contenteditable="true">£100</th>
-
-</tr>
-
-<tr>
-<th contenteditable="true">Rent from flat</th>
-<th contenteditable="true">£400</th>
-</tr>
-
-</tbody>
-</table>
-
-<div class="field">
-<div class="control">
-<button id="addIncomeTableRowBtn" class="button is-inverted is-outlined">
-<p class="addBtn">ADD ROW</p><br>
-<i class="fas fa-plus-square"></i>
-</button>
-<button id="removeIncomeRow" class="button is-inverted is-outlined">
+<section id="incomeAndExpSec">
+    <section class="hero is-light is-bold">
+    <div class="hero-body">
+    <div class="container">
+    
+    <section class="hero has-background-grey has-text-white">
+    <div class="hero-body">
+    <div class="container">
+    <h1 class="title has-text-white">1. Update monthly income</h1>
+    <section id="incomeRowWrapper">
+    
+    <form class="incomeRow">
+    <div class="field-is-grouped">
+    <div class="field has-addons">
+    <p class="control"></p><a class="button is-static">Source</a></p>  
+    <p class="control"><input class="input incomeSource" type="text"></p>
+    <p class="control"><a class="button is-static">Amount</a></p>  
+    <p class="control"><input class="input incomeAmount" type="number"></p>
+    </div>
+    </div>
+    </form>
+    
+    </section>
+    <div class="field is-grouped">
+    <div class="control">
+    <button id="addIncomeTableRowBtn" class="button is-inverted is-outlined">
+    <p class="addBtn">ADD ROW</p><br>
+    <i class="fas fa-plus-square"></i>
+    </button>
+    </div>
+    <p class="control">
+    <button id="removeIncomeTableRowBtn" class="button is-inverted is-outlined">
     <p class="addBtn">REMOVE LAST ROW</p><br>
     <i class="fas fa-minus-square"></i>
     </button>
-</div>
-</div>
+    </p>
+    </div>
+    
+    </div>
+    </div>
+    </section>
+    
+    <!-- UPDATE EXPENSES SECTION -->
+    <section class="hero is-primary has-text-white">
+    <div class="hero-body">
+    <div class="container">
+    <h1 class="title has-text-white">1. Update regular/essential monthly expenses</h1>
+    <section id="expenditureRowWrapper">
+    
+    <form class="expenseRow">
+    <div class="field-is-grouped">
+    <div class="field has-addons">
+    <p class="control"><a class="button is-static">Source</a></p>  
+    <p class="control"><input class="input expenseSource" type="text"></p>
+    <p class="control"><a class="button is-static">Amount</a></p>  
+    <p class="control"><input class="input expenseAmount" type="number"></p>
+    </div>
+    </div>  
+    </form>
+    
+    </section>
+    
+    <div class="field is-grouped">
+    <div class="control">
+    <button id="addExpenseTableRowBtn" class="button is-inverted is-outlined">
+    <p class="addBtn">ADD ROW</p><br>
+    <i class="fas fa-plus-square"></i>
+    </button>
+    </div>
+    <p class="control">
+    <button id="removeExpenseTableRowBtn" class="button is-inverted is-outlined">
+    <p class="addBtn">REMOVE LAST ROW</p><br>
+    <i class="fas fa-minus-square"></i>
+    </button>
+    </p>
+    </div>
+    
+    
+    </div>
+    </div>
+    <!-- END OF UPDATE EXPENSES SECTION -->
+    </section>
+    <!-- END OF INC/EXP SECTION EXPENSES SECTION -->
+    </section>
+    <!-- END OF WRAPPER FOR INCOME-EXP -->
+    </section>
 
-
-<a href="#" class="button is-medium is-info is-inverted is-outlined has-text-weight-bold" id="updateIncome">Update</a>
-
-</div>
-</div>
-</section>
-
-
-<section class="hero has-background-primary">
-<div class="hero-body">
-<div class="container">
-<h1 class="title has-text-white">Regular Expenses</h1>
-
-<table class="table is-hoverable has-text-centered">
-<thead class="is-size-5 has-background-link">
-<th class="has-text-white">Outgoing</th>
-<th class="has-text-white">Amount</th>
-</thead>
-<tbody id="expenseTableBody">
-<tr class="is-striped is-bordered">
-<th contenteditable="true">Morgage</th>
-<th contenteditable="true">£1000</th>
-</tr>
-
-<tr>
-<th contenteditable="true">Electric   </th>
-<th contenteditable="true">£100</th>
-
-</tr>
-
-<tr>
-<th contenteditable="true">Phone Bill</th>
-<th contenteditable="true">£30</th>
-</tr>
-
-<tr>
-<th contenteditable="true">Phone Bill</th>
-<th contenteditable="true">£30</th>
-</tr>
-
-</tbody>
-</table>
-<div class="field">
-<div class="control">
-<button id="addExpenseTableRowBtn" class="button is-inverted is-outlined">
-<p class="addBtn">ADD</p><br>
-<i class="fas fa-plus-square"></i>
-</button>
-</div>
-</div>
-
-<a href="#" class="button is-medium is-info is-inverted is-outlined has-text-weight-bold" id="updateExpenses">Update</a>
-
-</div>
-</div>
-</section>
-
-
-
+<!-- BUDGETING GOAL SECTION -->
 <section class="hero is-info has-text-centered">
 <div class="hero-body">
 <div class="container">
-<h1 class="title is-size-1">Budgeting goal<span id="gapBetweenDashGoal"></span>£<strong id="budgetAmount" contenteditable="true">300</strong></h1>
-<br>
-<a href="#" class="button is-medium is-info has-text-weight-bold is-inverted is-outlined" id="updateGoal">
-Update</a>
-
-
-
+<h1 class="title is-size-1">Update budgeting goal<span id="gapBetweenDashGoal"> 
+</span>£<strong id="budgetAmount" contenteditable="true">300</strong></h1>
 </div>
 </div>
 </section>
+
+
+<!-- SUBMIT AND UPDATE ACCOUNT -->
+<section class="hero is-danger is-small has-text-centered">
+<div class="hero-body">
+<div class="container">
+<a href="#" class="button is-large is-info has-text-weight-bold is-inverted is-outlined" id="updateGoal">
+Update account</a>
+</div>
+</div>
+</section>
+
+
+
+
+
+
+
+
 
 
 

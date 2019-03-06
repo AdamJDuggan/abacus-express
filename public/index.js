@@ -2,7 +2,6 @@
 // LANDING PAGE JS 
 // *****************************************************************
 
-
 // LOGIN PAGE DISPLAY DIV ELEMENTS 
 function showLogin() {
     $('#loginBtn').on('click', event => {
@@ -57,7 +56,7 @@ function watchRegisterFormSubmit() {
             })
             .then(user => {
                 console.log(user);
-                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("user", user.authToken);
                 window.location = 'setup.html';                
             })
             .catch(err => {console.error('Error:', err)});
@@ -70,50 +69,48 @@ function watchRegisterFormSubmit() {
 
 
 
-// *****************************************************************
-// SETUP SCREEN INCOME AND EXPENSES 
-// *****************************************************************
-
-
-
 
 // *****************************************************************
 // LOGIN FORM 
 // *****************************************************************
-// function watchLoginFormSubmit() {
+function watchLoginFormSubmit() {
 
-//     $('#loginForm').submit(function (e) {
-//         // Prevent dedault form behaviour 
-//         e.preventDefault();
-//         let user = {
-//             username: $('#loginEmail').val(),
-//             password: $('#loginPassword').val(),
-//         }
+    $('#loginForm').submit(function (e) {
+        // Prevent dedault form behaviour 
+        e.preventDefault();
+        let user = {
+            username: $('#loginEmail').val(),
+            password: $('#loginPassword').val(),
+        }
 
-//         let options = {
-//             method: 'POST',
-//             headers: {
-//                 "Content-Type": 'application/json'
-//             },
-//             body: JSON.stringify({user})
-//         }
+        let options = {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({user})
+        }
 
-//         fetch('/api/auth/login', options)
-//             .then(response => {
-//                 console.log('Returned from server')
-//                 return response.json()
-//             })
-//             .then(user => {
-//                 localStorage.setItem("user", JSON.stringify(user));
-//                 window.location = 'dashboard.html';                
-//             })
-//             .catch(err => console.error('Error:', err));
-//     })
-// };
+        fetch('/api/auth/login', options)
+            .then(response => {
+                console.log('Returned from server')
+                return response.json(response)
+            })
+            .then(user => {
+                localStorage.setItem("user", JSON.stringify(user));
+                window.location = 'dashboard.html';                
+            })
+            .catch(err => console.error('Error:', err));
+    })
+};
 
 
 // -------------------------------------------------------------------------------------------------------------------
 
+// *****************************************************************
+// LOGIN FORM 
+// *****************************************************************
+ 
 
 
 // *****************************************************************
@@ -122,6 +119,7 @@ function watchRegisterFormSubmit() {
 function indexWrapperFunction() {
     divDisplayWrapper();
     watchRegisterFormSubmit();
+    watchLoginFormSubmit();
 }
 
 $(indexWrapperFunction());

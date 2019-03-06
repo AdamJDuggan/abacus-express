@@ -14,6 +14,11 @@ input{max-width: 200px;}
     margin-bottom: 30px;
 }
 
+#createUpdateBtn,
+#removeAccountBtn,
+#logoutBtn{
+    margin-left: 8px;s
+}
 .input{max-width: 350px;}
 
 .column{border-radius: 5%; margin: 4px;}
@@ -69,3 +74,7 @@ input{max-width: 200px;}
     display : none;
 }
 
+#budgetAmount{border: 1px solid white; margin: 10px; padding: 10px; border-radius: 10%;}
+
+
+#incomeAndExpSec{display: none;}

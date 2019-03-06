@@ -24,10 +24,25 @@ function removeRowFromDashBoardTable(){
     });
 };
 
-// UPDATE EXPENDITURE/INCOME WRAPPER FUNCTION (POST TO DB, UPDATE SUMMARY)
+
+// SETUP PAGE REMOVE ROW FROM INCOME TABLE
+function removeRowFromSetupIncomeTable(){
+    $('#removeIncomeTableRowBtn').on('click', function () {
+        event.preventDefault(); 
+       $('.incomeRow').last().remove();
+    });
+};
+
+// SETUP PAGE REMOVE ROW FROM INCOME TABLE
+function removeRowFromSetupExpensesTable(){
+    $('#removeExpenseTableRowBtn').on('click', function () {
+        event.preventDefault(); 
+       $('.expenseRow').last().remove();
+    });
+};
 
 
-// UPDATE GOAL: PUSH TO DB AND UPDATE PAGE  
+// UPDATE ACCOUNT  
 
 
 

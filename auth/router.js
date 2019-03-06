@@ -20,21 +20,41 @@ const createAuthToken = function(user) {
 
 const localAuth = passport.authenticate('local', {session: false});
 
+const jwtAuth = passport.authenticate('jwt', {session: false});
 
 router.use(bodyParser.json());
 
 //-----------------------------------------------------
-// The user provides a username and password to login
+// Login The user provides a username and password to login
 //-----------------------------------------------------
-router.post('/login', localAuth, (req, res) => {
-  const authToken = createAuthToken(req.user.serialize());
-  console.log("landed in auth router" + authToken)
-  res.json({authToken});
+router.post('/login', (req, res) => {
+
+  console.log('infomation sent from reg form');
+  const {username, password} = req.body;
+
+  // Check DB for existing user
+    User.find({username: username})
+    .then(user => {
+      console.log(user)
+        if(user.length > 0){console.log('username already registered. I want this to show on screen')} 
+      // Log in new user
+        else {
+          const authToken = createAuthToken(username);
+          res.json({authToken});
+          }
+      })
+                
 });
+  
+// END OF ROUTER POST FROM LOGIN TO DASHBOARD
 
-const jwtAuth = passport.authenticate('jwt', {session: false});
 
-// The user exchanges a valid JWT for a new one with a later expiration
+
+
+
+//-----------------------------------------------------
+// Refresh: The user exchanges a valid JWT for a new one with a later expiration
+//-----------------------------------------------------
 router.post('/refresh', jwtAuth, (req, res) => {
   const authToken = createAuthToken(req.user);
   res.json({authToken});
@@ -46,7 +66,7 @@ router.post('/refresh', jwtAuth, (req, res) => {
 // move to setup account screen passing user id as jwt
 //---------------------------------------------------------------
 router.post('/register', (req, res) => {
-
+  
   console.log('infomation sent from reg form');
   const {username, password, password2} = req.body;
 
@@ -97,28 +117,6 @@ router.post('/register', (req, res) => {
 // END OF ROUTER POST TO SETUP ON REGISTRATION 
 });
 
-
-
-
-//---------------------------------------------------------------
-// Setup screen: Push income and expenditure to db  
-//---------------------------------------------------------------
-router.post('/setup1', (req, res) => {
-  const {user, obj} = req.body;
-  console.log(req.body.obj);
-  // console.log(JSON.parse(req.body.user).authToken);
-
-  jwt.verify(JSON.parse(req.body.user).authToken, 'myfirstapp', function(err, decoded){
-    console.log(decoded.user);
-    User.find({username: decoded.user})
-    .then(user => {
-        if(!user){console.log('not matching oon db')}
-        else(console.log('matched on db!'));
-  })
-})
-  
-  
-})
 
 
 

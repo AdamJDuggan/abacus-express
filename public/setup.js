@@ -2,9 +2,8 @@
 // SETUP ACCOUNT PAGE JS 
 // *****************************************************************
 
-
 // ADD ROWS TO INCOME  TABLE (WHICH ARE PASSED IN AS ARGUMENTS IN initilize FUNCTION)
-function addRowToSetupIncome(btn, table){
+function addRowToSetupIncome(){
     $('#addIncomeTableRowBtn').on('click', event => {
         event.preventDefault();
         $('#incomeRowWrapper').append(
@@ -42,13 +41,30 @@ function addRowToSetupExpense(){
 }
 
 
-// SETUP PAGE REMOVE ROW WITH TRASH ICON FROM INCOME AND EXPENDITURE TABLE
-function removeRowFromSetupTable(btn, table){
-    $(table).on('click', btn , function () {
+// SETUP PAGE REMOVE ROW FROM INCOME TABLE
+function removeRowFromSetupIncomeTable(){
+    $('#removeIncomeTableRowBtn').on('click', function () {
         event.preventDefault(); 
-        $(this).closest('tr').remove();
+       $('.incomeRow').last().remove();
     });
 };
+
+// SETUP PAGE REMOVE ROW FROM INCOME TABLE
+function removeRowFromSetupExpensesTable(){
+    $('#removeExpenseTableRowBtn').on('click', function () {
+        event.preventDefault(); 
+       $('.expenseRow').last().remove();
+    });
+};
+
+// CLICK UPDATE ACCOUNT TO OPEN DIV
+function openUpdateAccount(){
+    $('#createUpdateBtn').on('click', e => {
+        e.preventDefault();
+        $('#accountSummarySection').toggle();
+        $('#incomeAndExpSec').toggle();
+    })
+}
 
 
 // CALCULATE GOAL
@@ -86,30 +102,46 @@ function calculateGoal(){
 
 // PUSH INCOME AND EXPENDITURE TO DB
 function postIncomeAndExp() {
+
     // User email for local storage 
-    let user = localStorage.getItem('user');  
+    let fullUser = localStorage.getItem('user');
+    // let user = fullUser.substring(13, fullUser.length);
+    console.log(fullUser);
+    // ------------------------------
+    
     // User income and expenses to be turned into objects to send to db
-    let obj = {};   
+    let income = {};   
     $('.incomeRow').each(function() {
-        obj[ $(this).find('.incomeSource').val()] 
+        income[ $(this).find('.incomeSource').val()] 
         = $(this).find('.incomeAmount').val()
     });
+    let expenses = {};   
+    $('.expenseRow').each(function() {
+        expenses[ $(this).find('.expenseSource').val()] 
+        = $(this).find('.expenseAmount').val()
+    });
+    let incomeAndExp = [];
+    incomeAndExp.push(income, expenses);
+    console.log(incomeAndExp);
+    // ------------------------------
 
-    console.log(obj);
     // Make post to API 
     let options = {
         method: 'POST',
         headers: {
-            "Content-Type": 'application/json'
-        },
-        body: JSON.stringify({user}, obj)
-    }
-        console.log('From fetch in html: ' + user + obj);
-        fetch('/api/auth/setup1', options)
-            .then(response => {
-                return response.json()
-            })
+            "Content-Type": 'application/json',
+            'Authorization': 'Bearer ' + fullUser
+            },
+        body: JSON.stringify(incomeAndExp)
+        }
+        fetch('/api/acct/setup', options)
+            // .then(response => {
+            //     return response.json()
+            // })
             .catch(err => console.error('Error:', err));
+    // ------------------------------
+
+// END OF INCOME AND EXPENSES FUNCTION 
 };
 
 
@@ -157,10 +189,11 @@ function setGoalAndSubmit(){
 // WRAPPER FUNCTION 
 // *****************************************************************
 function setupPageWrapper(){
+openUpdateAccount();
 addRowToSetupIncome('#addIncomeTableRowBtn', '#incomeTableBody');
 addRowToSetupExpense('#addExpenditureTableRowBtn', '#expenditureTableBody');
-removeRowFromSetupTable('#addIncomeTableRowBtn', '#incomeTableBody');
-removeRowFromSetupTable('#addExpenditureTableRowBtn', '#expenditureTableBody');
+removeRowFromSetupIncomeTable();
+removeRowFromSetupExpensesTable();
 showBudgetingGoal();
 setGoalAndSubmit();
 } 

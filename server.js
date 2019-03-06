@@ -8,6 +8,7 @@ const passport = require('passport');
 
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+const { router: acctRouter } = require('./acct/router');
 
 mongoose.Promise = global.Promise;
 
@@ -29,13 +30,12 @@ app.use(function (req, res, next) {
   next();
 });
 
-
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 app.use(express.static('public'));
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
-
+app.use('/api/acct/', acctRouter);
 
 
 const jwtAuth = passport.authenticate('jwt', { session: false });

@@ -12,17 +12,16 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
-  },
-  budgetinggoal: {
-    type: Number
-  },  
+  }, 
   income: [
     {source: {type: String}, amount: {type: Number}}
   ],
-  expenditure: [
+  expenses: [
     {source: {type: String}, amount: {type: Number}}
   ],
-   
+  budgetinggoal: {
+    type: Number
+  }
 });
 
 UserSchema.methods.serialize = function() {

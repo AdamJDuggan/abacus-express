@@ -1,5 +1,5 @@
 // *****************************************************************
-// SETUP ACCOUNT PAGE JS 
+// REGISTER ACCOUNT PAGE 
 // *****************************************************************
 
 // ADD ROWS TO INCOME  TABLE (WHICH ARE PASSED IN AS ARGUMENTS IN initilize FUNCTION)
@@ -57,20 +57,11 @@ function removeRowFromSetupExpensesTable(){
     });
 };
 
-// CLICK UPDATE ACCOUNT TO OPEN DIV
-function openUpdateAccount(){
-    $('#createUpdateBtn').on('click', e => {
-        e.preventDefault();
-        $('#accountSummarySection').toggle();
-        $('#incomeAndExpSec').toggle();
-    })
-}
-
 
 // CALCULATE GOAL
 function calculateGoal(){
     //turn off button so it cant be re-pressed
-    $('#loginCalculateBtn').toggle();
+    $('#hideIncExpAndCalcBtn').toggle();
     // Calculate total income
     let incomeSum = 0;
     $(".incomeAmount").each(function(){
@@ -86,7 +77,7 @@ function calculateGoal(){
 
     $('#summarySection').append(
         `<div class="column is-one-quarter has-background-grey has-t ext-white loginSummaryBtn has-text-centered">
-        <p class="heading is-size-6 has-text-weight-bold ">Your monthly income</p>
+        <p class="heading is-size-6 has-text-weight-bold has-text-white ">Your monthly income</p>
         <p class="title has-text-white">£${incomeSum}</p>
         </div>
         <div class="column is-one-quarter has-background-primary has-text-white loginSummaryBtn has-text-centered">
@@ -100,87 +91,67 @@ function calculateGoal(){
     )
 };
 
-// PUSH INCOME AND EXPENDITURE TO DB
-function postIncomeAndExp() {
+function register(){
+    $('#regAndCalculateBtn').on('click', function (e) {
+        e.preventDefault();
+        console.log('clicked');
+         // User income and expenses to be turned into objects to send to db
+         let income = {};   
+         $('.incomeRow').each(function() {
+             income[ $(this).find('.incomeSource').val()] 
+             = $(this).find('.incomeAmount').val()
+         });
+         let expenses = {};   
+         $('.expenseRow').each(function() {
+            expenses[ $(this).find('.expenseSource').val()] 
+             = $(this).find('.expenseAmount').val()
+         });
+     // ------------------------------
+ 
+         let user = {
+             username: $('#registerEmail').val(),
+             password: $('#registerPassword').val(),
+             password2: $('#registerPassword2').val(),
+             income: income,
+             expenses: expenses
+         }
+         console.log(user);
 
-    // User email for local storage 
-    let fullUser = localStorage.getItem('user');
-    // let user = fullUser.substring(13, fullUser.length);
-    console.log(fullUser);
-    // ------------------------------
-    
-    // User income and expenses to be turned into objects to send to db
-    let income = {};   
-    $('.incomeRow').each(function() {
-        income[ $(this).find('.incomeSource').val()] 
-        = $(this).find('.incomeAmount').val()
-    });
-    let expenses = {};   
-    $('.expenseRow').each(function() {
-        expenses[ $(this).find('.expenseSource').val()] 
-        = $(this).find('.expenseAmount').val()
-    });
-    let incomeAndExp = [];
-    incomeAndExp.push(income, expenses);
-    console.log(incomeAndExp);
-    // ------------------------------
-
-    // Make post to API 
-    let options = {
-        method: 'POST',
-        headers: {
-            "Content-Type": 'application/json',
-            'Authorization': 'Bearer ' + fullUser
+        //  FETCH TO SERVER
+        let options = {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
             },
-        body: JSON.stringify(incomeAndExp)
+            body: JSON.stringify(user)
         }
-        fetch('/api/acct/setup', options)
-            // .then(response => {
-            //     return response.json()
-            // })
-            .catch(err => console.error('Error:', err));
-    // ------------------------------
 
-// END OF INCOME AND EXPENSES FUNCTION 
-};
+        fetch('api/auth/register', options)
+            .then(response => {
+                console.log('Returned from server')
+                return response.json()
+            })
+            .then(user => {
+                console.log(user);
+                localStorage.setItem("user", user.authToken);
+                window.location = 'dashboard.html';                
+            })
+            .catch(err => {console.error('Error:', err)});
 
 
-
+    })
+}
 
 // CALCULATE BUDGET AND DISPLAY BUDGETING GOAL 
 function showBudgetingGoal() {
-    $('#loginCalculateBtn').on('click', event => {
+    $('#regAndCalculateBtn').on('click', event => {
         event.preventDefault();    
         $('#loginBudgetingGoalSection').show(); 
         $('#loginSetupFinalSubmit').show();
-        calculateGoal();
-        postIncomeAndExp();           
+        calculateGoal();  
     })
 };
 
-
-// Push budgeting goal to db and move to dashboard
-function setGoalAndSubmit(){
-    $('#loginFinalSubmitBtn').on('click', event => {
-        event.preventDefault();    
-        let goal = $('#budgetGoalInput').val();
-        let email = localStorage.getItem('user');  
-    // Make post to API 
-    let options = {
-        method: 'POST',
-        headers: {
-            "Content-Type": 'application/json'
-        },
-        body: JSON.stringify({email, goal})
-    }
-        console.log('From second fetch: ' + email + goal);
-        fetch('/user/secondpush', options)
-            .then(response => {
-                return response.json()
-            })
-            .catch(err => console.error('Error:', err));
-    })
-}
 
 // -------------------------------------------------------------------------------------------------------------------
 
@@ -188,16 +159,18 @@ function setGoalAndSubmit(){
 // *****************************************************************
 // WRAPPER FUNCTION 
 // *****************************************************************
+
+
 function setupPageWrapper(){
-openUpdateAccount();
 addRowToSetupIncome('#addIncomeTableRowBtn', '#incomeTableBody');
 addRowToSetupExpense('#addExpenditureTableRowBtn', '#expenditureTableBody');
 removeRowFromSetupIncomeTable();
 removeRowFromSetupExpensesTable();
 showBudgetingGoal();
-setGoalAndSubmit();
+register(); 
 } 
 
-
 $(setupPageWrapper());
+
+
 

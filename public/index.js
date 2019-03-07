@@ -6,64 +6,19 @@
 function showLogin() {
     $('#loginBtn').on('click', event => {
         event.preventDefault();
-        $('#register').hide();
+        // $('#register').hide();
         $('#login').toggle();
     })
 };
-// REG DIV DISPLAY DIV ELEMENT 
-function showRegister() {
+
+function goToReg(){
     $('#registerBtn').on('click', event => {
         event.preventDefault();
-        $('#login').hide();
-        $('#register').toggle();
+        window.location = 'register.html';                
     })
-};
-
-// WRAPPER FOR ABOVE STYLE DISPLAY TOGGLES 
-function divDisplayWrapper() {
-    showLogin();
-    showRegister();
 }
-// -------------------------------------------------------------------------------------------------------------------
-
-// *****************************************************************
-// REGISTRATION FORM 
-// *****************************************************************
-function watchRegisterFormSubmit() {
-
-    $('#regForm').submit(function (e) {
-        // Prevent dedault form behaviour 
-        e.preventDefault();
-        let user = {
-            username: $('#registerEmail').val(),
-            password: $('#registerPassword').val(),
-            password2: $('#registerPassword2').val(),
-        }
-
-        let options = {
-            method: 'POST',
-            headers: {
-                "Content-Type": 'application/json'
-            },
-            body: JSON.stringify(user)
-        }
-
-        fetch('api/auth/register', options)
-            .then(response => {
-                console.log('Returned from server')
-                return response.json()
-            })
-            .then(user => {
-                console.log(user);
-                localStorage.setItem("user", user.authToken);
-                window.location = 'account.html';                
-            })
-            .catch(err => {console.error('Error:', err)});
-    })
-};
 
 // -------------------------------------------------------------------------------------------------------------------
-
 
 
 
@@ -97,7 +52,7 @@ function watchLoginFormSubmit() {
             .then(user => {
                 console.log(user);
                 localStorage.setItem("user", user.authToken);
-                window.location = 'account.html';                  
+                window.location = 'dashboard.html';                  
             })
             .catch(err => console.error('Error:', err));
     })
@@ -112,9 +67,9 @@ function watchLoginFormSubmit() {
 // WRAPPER FUNCTION  
 // *****************************************************************
 function indexWrapperFunction() {
-    divDisplayWrapper();
-    watchRegisterFormSubmit();
+    showLogin();
     watchLoginFormSubmit();
+    goToReg();
 }
 
 $(indexWrapperFunction());

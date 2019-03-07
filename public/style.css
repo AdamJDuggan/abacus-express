@@ -1,6 +1,5 @@
 /* HIDE LOGIN AND REGISTER DIVS ON LOGIN SCREEN */
 #login{display:none;}
-#register{display:none;}
 
 .loginHeadBtns,
 #updateGoal {
@@ -76,5 +75,3 @@ input{max-width: 200px;}
 
 #budgetAmount{border: 1px solid white; margin: 10px; padding: 10px; border-radius: 10%;}
 
-
-#incomeAndExpSec{display: none;}

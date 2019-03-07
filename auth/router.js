@@ -29,22 +29,7 @@ router.use(bodyParser.json());
 //-----------------------------------------------------
 router.post('/login', localAuth, (req, res) => {
   const authToken = createAuthToken(req.user.serialize());
-  res.json({authToken});
-  // console.log('infomation sent from reg form');
-  // const {username, password} = req.body;
-
-  // // Check DB for existing user
-  //   User.find({password: password})
-  //   .then(user => {
-  //     console.log(user)
-  //       if(user.length > 0){console.log('username already registered. I want this to show on screen')} 
-  //     // Log in new user
-  //       else {
-  //         const authToken = createAuthToken(username);
-  //         res.json({authToken});
-  //         }
-  //     })
-                
+  res.json({authToken});                
 });
   
 // END OF ROUTER POST FROM LOGIN TO DASHBOARD
@@ -61,13 +46,12 @@ router.post('/refresh', jwtAuth, (req, res) => {
 
 
 //---------------------------------------------------------------
-// Registration form submit: validate, create new user on db and
-// move to setup account screen passing user id as jwt
+// Registration form submit: validate, and if no user then push new user to db
 //---------------------------------------------------------------
 router.post('/register', (req, res) => {
   
   console.log('infomation sent from reg form');
-  const {username, password, password2} = req.body;
+  const {username, password, password2, income, expenses } = req.body;
 
   // Validation
   let errors = [];
@@ -91,7 +75,7 @@ router.post('/register', (req, res) => {
         else {
               // I have a model and I am here creating a new instance
               // HERE
-              const newUser = new User({username, password});
+              const newUser = new User({username, password, income, expenses});
               // Hash password before saving to DB. Generate a salt so we can create a hash 
               //takes number of keys as argument
               bcrypt.genSalt(10, (err, salt) => 

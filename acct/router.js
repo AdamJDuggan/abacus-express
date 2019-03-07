@@ -12,7 +12,7 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 
 
 //---------------------------------------------------------------
-// Account: View and update account 
+// Account: Update account 
 //---------------------------------------------------------------
 router.post('/setup', jwtAuth, jsonParser, (req, res) => {
     console.log('coming through to router');
@@ -23,8 +23,8 @@ router.post('/setup', jwtAuth, jsonParser, (req, res) => {
     console.log(income);
     const expenses = (incomeAndExpenses[1]);
     console.log(expenses);
-
-    User.find({username: user})
+  // findandupdate
+    User.findOneAndUpdate({username: user.username})
       .then(user => {
           if(!user){console.log('not matching on db')}
           else(

@@ -26,7 +26,6 @@ function divDisplayWrapper() {
 }
 // -------------------------------------------------------------------------------------------------------------------
 
-
 // *****************************************************************
 // REGISTRATION FORM 
 // *****************************************************************
@@ -57,12 +56,11 @@ function watchRegisterFormSubmit() {
             .then(user => {
                 console.log(user);
                 localStorage.setItem("user", user.authToken);
-                window.location = 'setup.html';                
+                window.location = 'account.html';                
             })
             .catch(err => {console.error('Error:', err)});
     })
 };
-
 
 // -------------------------------------------------------------------------------------------------------------------
 
@@ -88,7 +86,7 @@ function watchLoginFormSubmit() {
             headers: {
                 "Content-Type": 'application/json'
             },
-            body: JSON.stringify({user})
+            body: JSON.stringify(user)
         }
 
         fetch('/api/auth/login', options)
@@ -97,20 +95,17 @@ function watchLoginFormSubmit() {
                 return response.json(response)
             })
             .then(user => {
-                localStorage.setItem("user", JSON.stringify(user));
-                window.location = 'dashboard.html';                
+                console.log(user);
+                localStorage.setItem("user", user.authToken);
+                window.location = 'account.html';                  
             })
             .catch(err => console.error('Error:', err));
     })
 };
 
-
 // -------------------------------------------------------------------------------------------------------------------
 
-// *****************************************************************
-// LOGIN FORM 
-// *****************************************************************
- 
+
 
 
 // *****************************************************************

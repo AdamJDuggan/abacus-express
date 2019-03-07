@@ -27,28 +27,27 @@ router.use(bodyParser.json());
 //-----------------------------------------------------
 // Login The user provides a username and password to login
 //-----------------------------------------------------
-router.post('/login', (req, res) => {
+router.post('/login', localAuth, (req, res) => {
+  const authToken = createAuthToken(req.user.serialize());
+  res.json({authToken});
+  // console.log('infomation sent from reg form');
+  // const {username, password} = req.body;
 
-  console.log('infomation sent from reg form');
-  const {username, password} = req.body;
-
-  // Check DB for existing user
-    User.find({username: username})
-    .then(user => {
-      console.log(user)
-        if(user.length > 0){console.log('username already registered. I want this to show on screen')} 
-      // Log in new user
-        else {
-          const authToken = createAuthToken(username);
-          res.json({authToken});
-          }
-      })
+  // // Check DB for existing user
+  //   User.find({password: password})
+  //   .then(user => {
+  //     console.log(user)
+  //       if(user.length > 0){console.log('username already registered. I want this to show on screen')} 
+  //     // Log in new user
+  //       else {
+  //         const authToken = createAuthToken(username);
+  //         res.json({authToken});
+  //         }
+  //     })
                 
 });
   
 // END OF ROUTER POST FROM LOGIN TO DASHBOARD
-
-
 
 
 

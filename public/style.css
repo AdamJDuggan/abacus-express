@@ -14,8 +14,10 @@ input{max-width: 200px;}
 }
 
 #createUpdateBtn,
+#deleteAccountBtn,
 #removeAccountBtn,
-#logoutBtn{
+#logoutBtn,
+#addMonthBtn{
     margin: 8px;
 }
 .input{max-width: 350px;}
@@ -63,7 +65,7 @@ input{max-width: 200px;}
 
 #tablebody{font-weight: 300;}
 
-#summaryTitle{margin-bottom: 55px;}
+#summarySection, #summaryTitle, #updateTitle, #monthTitle {margin-bottom: 55px;}
 
 #gapBetweenDashGoal{margin-right: 25px;}
 
@@ -73,5 +75,10 @@ input{max-width: 200px;}
     display : none;
 }
 
+.is-static{padding: 4px; max-width: 70px;}
+
 #budgetAmount{border: 1px solid white; margin: 10px; padding: 10px; border-radius: 10%;}
 
+#errorMsg{display: none;}
+
+#addMonthForm{margin-top: 70px;}

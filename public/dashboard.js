@@ -45,12 +45,57 @@ function removeRowFromSetupExpensesTable(){
 // UPDATE ACCOUNT  
 
 
+// PUSH NEW MONTH 
+function newMonth(){
+    $('#addMonthBtn').on('click', e => {
+        e.preventDefault();
+        month = $('#addMonthMonth').val();
+        amount = $('#addMonthAmount').val();
+        remaining = $('#')
+        $('#monthRow').append(`
+        <nav class="level">
+        <div class="level-item has-text-centered has-text-white">
+        <div>
+        <p class="heading">Month</p>
+        <p class="title">${month}</p>
+        </div>
+        </div>
+        <div class="level-item has-text-centered">
+        <div>
+        <p class="heading">Non-essential spending</p>
+        <p class="title">£${amount}</p>
+        </div>
+        </div>
+        <div class="level-item has-text-centered">
+        <div>
+        <p class="heading">Non-essential spending</p>
+        <p class="title">£${amount}</p>
+        </div>
+        </div>
+        </nav>
+        <hr>
+        `)
+    })
+}
+
+
+// LOGOUT BUTTON
+function logout(){
+    $('logoutBtn').on('click', e => {
+        e.preventDefault();
+        localStorage.clear();
+        window.location="index.html";
+    })
+}
+
 
 // WRAPPER FOR ALL ABOVE STYLE DISPLAY TOGGLES 
 function dashboardWrapperFunction(){ 
     addRowToDashBoardTable('#addIncomeTableRowBtn', '#incomeTableBody');
     addRowToDashBoardTable('#addExpenseTableRowBtn', '#expenseTableBody');
     removeRowFromDashBoardTable();
+    newMonth();
+    logout();
 }
 
 $(dashboardWrapperFunction());

@@ -11,6 +11,7 @@ function showLogin() {
     })
 };
 
+// GOT TO REGISTRATION SCREEN
 function goToReg(){
     $('#registerBtn').on('click', event => {
         event.preventDefault();
@@ -26,6 +27,7 @@ function goToReg(){
 // *****************************************************************
 // LOGIN FORM 
 // *****************************************************************
+
 function watchLoginFormSubmit() {
 
     $('#loginForm').submit(function (e) {
@@ -50,9 +52,9 @@ function watchLoginFormSubmit() {
                 return response.json(response)
             })
             .then(user => {
-                console.log(user);
                 localStorage.setItem("user", user.authToken);
-                window.location = 'dashboard.html';                  
+                window.location = 'dashboard.html';    
+                console.log(user);              
             })
             .catch(err => console.error('Error:', err));
     })

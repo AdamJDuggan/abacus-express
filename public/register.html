@@ -14,11 +14,11 @@
 <body>
 
 <!-- LANDING BANNER -->
-<section class="hero is-info is-small has-text-centered">
+<section class="hero is-info has-text-centered">
 <div class="hero-body">
 <div class="container">
-<h1 class="title is-size-2 is-spaced">Abacus Express</h1>
-<a href="#login" class="button is-medium is-info is-inverted is-outlined" id="">Home</a>
+<h1 class="title is-size-2 is-spaced">Abacus Express Registration</h1>
+<a href="#login" class="button is-medium is-info is-inverted is-outlined" id="home">Home</a>
 </div>
 </div>
 </section>
@@ -33,12 +33,12 @@
 <section id="register" class="hero is-small is-white is-bold">
 <div class="hero-body">
 <div class="container">
-<h1 class="title is-size-2">Register an account below</h1>
-<form id="regForm">
+<h1 class="title">1. Create login details</h1>
+<form>
 <div class="field">
 <label class="label">Email</label>
 <div class="control has-icons-left ">
-<input class="input" type="email" id="registerEmail" placeholder="Enter your email address as a username ">
+<input required class="input" type="email" id="registerEmail" placeholder="Enter your email address as a username ">
 <span class="icon is-small is-left">
 <i class="fas fa-user"></i>
 </span>
@@ -47,7 +47,7 @@
 <div class="field">
 <label class="label">Password</label>
 <div class="control has-icons-left has-icons-right">
-<input class="input" type="password" id="registerPassword" placeholder="Enter your password">
+<input required class="input" type="password" id="registerPassword" placeholder="Enter your password">
 <span class="icon is-small is-left">
 <i class="fas fa-lock"></i></span>
 </div>
@@ -55,14 +55,13 @@
 <div class="field">
 <label class="label">Confirm password</label>
 <div class="control has-icons-left has-icons-right">
-<input class="input" type="password" id="registerPassword2" placeholder="">
+<input required class="input" type="password" id="registerPassword2" placeholder="">
 <span class="icon is-small is-left">
 <i class="fas fa-lock"></i></span>
 </div>
 </div>
 <div class="field">
 <div class="control">
-<!-- <button id="ValidateReg" class="button is-large has-text-weight-bold is-link">Create account</button> -->
 </div>
 </div>
 </form>
@@ -73,7 +72,7 @@
 <section class="hero has-background-grey has-text-white">
 <div class="hero-body">
 <div class="container">
-<h1 class="title has-text-white">1. Add sources of
+<h1 class="title has-text-white">2. Add sources of
 monthly income</h1>
 <section id="incomeRowWrapper">
 <!-- EACH INCOME ROW FORM -->
@@ -119,7 +118,7 @@ ROW</p><br>
 <section class="hero is-primary has-text-white">
 <div class="hero-body">
 <div class="container">
-<h1 class="title has-text-white">1. Add
+<h1 class="title has-text-white">3. Add
 regular/essential monthly expenses</h1>
 <!-- EACH ROW OF EXPENSES -->
 <section id="expenditureRowWrapper">
@@ -162,32 +161,13 @@ ROW</p><br>
 </div>
 </section>
 
-<!-- CALCULATE BUTTON -->
-<section class="hero">
-<div class="hero-body">
-<div class="container">
-<a id="regAndCalculateBtn" class="button is-large is-danger has-text-weight-bold">Calculate</a>
-</div>
-</div>
-</section>
-
-<!-- INCOME+EXP+CALCUALTE BTN TO HIDE ON CALCUALTEBTN SUBMIT -->
-</section>
-
-
 <!-- BUDGETING GOAL SECTION -->
-<section id="loginBudgetingGoalSection" class="hero is-light">
+<section class="hero is-danger">
 <div class="hero-body">
 <div class="container">
-<h1 id="loginBudgetGoalheading" class="title">3. Set budgeting goal</h1>
+<h1 id="loginBudgetGoalheading" class="title">4. Set budgeting goal</h1>
 <h2 id="loginBudgetGoalSubHeading" class="subtitle">How much would you like to save
 each month?</h2>
-<!-- SUMMARY COLUMNS -->
-<div id="summarySection" class="columns">
-<!-- STRING INTERPOLATION OF CALCULATED VALUES FOR INCOME< EXPENCE AND BUDGET -->
-</div>
-
-<!-- INPUT BUDGETING GOAL AMMOUNT SECTION -->
 <div class="field">
 <div class="control has-icons-left">
 <input id="budgetGoalInput" class="input is-large" type="number"
@@ -201,21 +181,47 @@ placeholder="Per month">
 </div>
 </section>
 
-<!-- FINAL SUBMIT BUTTON -->
-<section id="loginSetupFinalSubmit" class="hero">
+<!-- MONTH REVIEW SECTION -->
+<section class="hero is-info">
+        <div class="hero-body">
+        <div class="container">
+        <h1 id="loginBudgetGoalheading" class="title">5. Enter last months dispendable outgoings</h1>
+        <h2 id="loginBudgetGoalSubHeading" class="subtitle">Add up all your non-essential spending from the last calendar month</h2>
+
+                <div class="field">
+                <label class="label has-text-white">Month</label>
+                <div class="control">
+                <input id="addMonthMonth" class="input" type="text" placeholder="Apr 19">
+                </div>
+                </div>
+                <div class="field">
+                <label class="label has-text-white">Total</label>
+                <div class="control">
+                <input id="addMonthAmount" class="input" type="number" placeholder="£">
+                </div>
+                </div>
+        </div>
+        </div>
+        </section>
+
+
+
+<div id="errorMsg" class="container"></div>
+
+
+<!-- CALCULATE BUTTON -->
+<section class="hero">
 <div class="hero-body">
 <div class="container">
-<a id="loginFinalSubmitBtn" class="button is-large is-info has-text-weight-bold">Create
-account</a>
+<p id="errorMsg">Sorry that username is already in use</p>
+<a id="regAndCalculateBtn" class="button is-large is-info has-text-weight-bold">Create Account</a>
 </div>
 </div>
 </section>
 
-
 </div>
 </div>
-
-
+</section>
 
 
 <!-- FOOTER -->

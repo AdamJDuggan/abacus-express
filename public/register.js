@@ -57,45 +57,21 @@ function removeRowFromSetupExpensesTable(){
     });
 };
 
+// HOME BUTTON AT TOP
+function goHome(){
+    $('#home').on('click', () => {
+        window.location = 'index.html';
+    })
+}
 
-// CALCULATE GOAL
-function calculateGoal(){
-    //turn off button so it cant be re-pressed
-    $('#hideIncExpAndCalcBtn').toggle();
-    // Calculate total income
-    let incomeSum = 0;
-    $(".incomeAmount").each(function(){
-        incomeSum += +$(this).val();
-    });
-    // Calculate total expenditure
-    let expSum = 0;
-    $(".expenseAmount").each(function(){
-        expSum += +$(this).val();
-    });
-    // Calculate remaining
-    let remaining = incomeSum - expSum;
 
-    $('#summarySection').append(
-        `<div class="column is-one-quarter has-background-grey has-t ext-white loginSummaryBtn has-text-centered">
-        <p class="heading is-size-6 has-text-weight-bold has-text-white ">Your monthly income</p>
-        <p class="title has-text-white">£${incomeSum}</p>
-        </div>
-        <div class="column is-one-quarter has-background-primary has-text-white loginSummaryBtn has-text-centered">
-        <p class="heading is-size-6 has-text-weight-bold ">Your total expenses</p>
-        <p class="title has-text-white">£${expSum}</p>
-        </div>
-        <div class="column is-one-quarter has-background-danger has-text-white loginSummaryBtn has-text-centered">
-        <p class="heading is-size-6 has-text-weight-bold ">Remaining p/m</p>
-        <p class="title has-text-white">£${remaining}</p>
-        </div>`
-    )
-};
 
+// Click to register an account and push income and exp to db
 function register(){
     $('#regAndCalculateBtn').on('click', function (e) {
         e.preventDefault();
         console.log('clicked');
-         // User income and expenses to be turned into objects to send to db
+         // User income, expenses and first month to be turned into objects to send to db
          let income = {};   
          $('.incomeRow').each(function() {
              income[ $(this).find('.incomeSource').val()] 
@@ -105,7 +81,9 @@ function register(){
          $('.expenseRow').each(function() {
             expenses[ $(this).find('.expenseSource').val()] 
              = $(this).find('.expenseAmount').val()
-         });
+         }); 
+         let monthly ={}
+         monthly[$('#addMonthMonth').val()]=[$('#addMonthAmount').val()]
      // ------------------------------
  
          let user = {
@@ -113,7 +91,9 @@ function register(){
              password: $('#registerPassword').val(),
              password2: $('#registerPassword2').val(),
              income: income,
-             expenses: expenses
+             expenses: expenses,
+             budgetinggoal: $('#budgetGoalInput').val(),
+             monthly: monthly
          }
          console.log(user);
 
@@ -134,23 +114,17 @@ function register(){
             .then(user => {
                 console.log(user);
                 localStorage.setItem("user", user.authToken);
-                window.location = 'dashboard.html';                
+                // window.location = 'dashboard.html';                
             })
-            .catch(err => {console.error('Error:', err)});
+            .catch(err => {
+                console.error('Error:', err)
+                $('#errorMsg').toggle();
+            });
 
 
     })
 }
 
-// CALCULATE BUDGET AND DISPLAY BUDGETING GOAL 
-function showBudgetingGoal() {
-    $('#regAndCalculateBtn').on('click', event => {
-        event.preventDefault();    
-        $('#loginBudgetingGoalSection').show(); 
-        $('#loginSetupFinalSubmit').show();
-        calculateGoal();  
-    })
-};
 
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -166,7 +140,7 @@ addRowToSetupIncome('#addIncomeTableRowBtn', '#incomeTableBody');
 addRowToSetupExpense('#addExpenditureTableRowBtn', '#expenditureTableBody');
 removeRowFromSetupIncomeTable();
 removeRowFromSetupExpensesTable();
-showBudgetingGoal();
+goHome();
 register(); 
 } 
 

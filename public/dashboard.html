@@ -19,71 +19,22 @@
 
 <body>
 
-<section class="hero is-info is-large">
-<div class="hero-head">
-    <nav class="navbar">
-    <div class="container">
-        <div class="navbar-brand">
-       <p class="display-is-4">Abacus Express</p>
-        <span class="navbar-burger burger" data-target="navbarMenuHeroB">
-            <span></span>
-            <span></span>
-            <span></span>
-        </span>
-        </div>
-        <div id="navbarMenuHeroB" class="navbar-menu">
-        <div class="navbar-end">
-            <a class="navbar-item is-active">
-            Home
-            </a>
-            <a class="navbar-item">
-            Examples
-            </a>
-            <a class="navbar-item">
-            Documentation
-            </a>
-            <span class="navbar-item">
-            <a class="button is-info is-inverted">
-                <span class="icon">
-                        <i class="fa fa-sign-out" aria-hidden="true"></i>                </span>
-                <span>Logout</span>
-            </a>
-            </span>
-        </div>
-        </div>
-    </div>
-    </nav>
-</div>
 
-<div class="hero-body">
-    <div class="container has-text-centered">
-    <p class="title">
-        Title
-    </p>
-    <p class="subtitle">
-        Subtitle
-    </p>
-    </div>
-</div>
-
-</section>
-
-<!-- WELCOME BANNER  -->
-<!-- <section class="hero is-info is-medium has-text-centered">
+    
+<!-- WELCOME BANNER -->
+<section class="hero is-info is-medium has-text-centered">
 <div class="hero-body">
 <div class="container">
-<h1 class="title is-size-2 is-spaced"><strong>Isaac's </strong>Dashboard</h1>
+<h1 class="title is-size-1 is-spaced">Dashboard</h1>
 <a href="#" class="button is-medium is-info is-inverted is-outlined" id="logoutBtn">Logout</a>
-<a href="#" class="button is-medium is-info is-inverted is-outlined" id="deleteAccountBtn">Delete account</a>
-
 </div>
 </div>
 </section>
 
 <!-- SUMMARY HEADER -->
-<section id="about" class="hero is-light has-text-centered">
+<section class="hero is-medium is-light has-text-centered">
 <div class="hero-body">
-<div class="container">
+<div id="summarySection" class="container">
 <h1 id="summaryTitle"class="title is-size-2">Summary</h1>
 <div class="columns">
 <div class="column is-one-quarter has-background-grey has-text-white">
@@ -94,11 +45,11 @@
 <p class="heading is-size-6 has-text-weight-bold ">Regular expenses</p>
 <p class="title has-text-white">£1500</p>
 </div>
-<div class="column is-one-quarter has-background-danger has-text-white">
+<div class="column is-one-quarter has-background-link has-text-white">
 <p class="heading is-size-6 has-text-weight-bold ">Remaining</p>
 <p class="title has-text-white">£1000</p>
 </div>
-<div class="column is-one-quarter has-background-link has-text-white">
+<div class="column is-one-quarter has-background-danger has-text-white">
 <p class="heading is-size-6 has-text-weight-bold ">Budgeting goal</p>
 <p class="title has-text-white">£300</p>
 
@@ -108,30 +59,101 @@
 </div>
 </section>
 
-<section id="incomeAndExpSec">
-<section class="hero is-light is-bold">
+<!-- MONTHLY REVIEW -->
+<section class="hero is-info">
 <div class="hero-body">
-<div class="container">
+<div id="summarySection" class="container">
+<h1 id="monthTitle"class="title is-size-2 has-text-centered">Monthly Review</h1>
+<section id="monthRow">
+<nav class="level">
+<div class="level-item has-text-centered has-text-white">
+<div>
+<p class="heading">Month</p>
+<p class="title">March 19</p>
+</div>
+</div>
+<div class="level-item has-text-centered">
+<div>
+<p class="heading">Non-essential spending</p>
+<p class="title">£400</p>
+</div>
+</div>
+</nav>
+<hr>
 
-<section class="hero has-background-grey has-text-white">
-<div class="hero-body">
-<div class="container">
-<h1 class="title has-text-white">1. Update monthly income</h1>
-<section id="incomeRowWrapper">
-
-<form class="incomeRow">
-<div class="field-is-grouped">
-<div class="field has-addons">
-<p class="control"></p><a class="button is-static">Source</a></p>  
-<p class="control"><input class="input incomeSource" type="text"></p>
-<p class="control"><a class="button is-static">Amount</a></p>  
-<p class="control"><input class="input incomeAmount" type="number"></p>
+<nav class="level">
+<div class="level-item has-text-centered has-text-white">
+<div>
+<p class="heading">Month</p>
+<p class="title">April 19</p>
+</div>
+</div>
+<div class="level-item has-text-centered">
+<div>
+<p class="heading">Non-essential spending</p>
+<p class="title">£300</p>
+</div>
+</div>
+</nav>
+<hr>
+</section>
+<form id="addMonthForm">
+<div class="field">
+<label class="label has-text-white">Add Month</label>
+<div class="control">
+<input id="addMonthMonth" class="input" type="text" placeholder="Text input">
+</div>
+</div>
+<div class="field">
+<label class="label has-text-white">Total non-essential spending</label>
+<div class="control">
+<input id="addMonthAmount" class="input" type="number" placeholder="Text input">
+</div>
+</div>
+<div class="field">
+<div class="control">
+<button id="addMonthBtn" class="button is-large is-info is-inverted is-outlined">Add</button>
 </div>
 </div>
 </form>
-
+</div>
+</div>
 </section>
-<div class="field is-grouped">
+
+
+<!-- UPDATE INC, EXP AND BUDGET -->
+<section  id="hideIncExpAndCalcBtn" class="hero is-light is-bold">
+<div class="hero-body">
+<div class="container">
+<h1 id="updateTitle" class="title is-size-2 is-spaced has-text-centered">Update budget</h1>
+
+<!-- INCOME UPDATE -->
+<section class="hero has-background-grey has-text-white">
+<div class="hero-body">
+<div class="container">
+<h1 class="title has-text-white">Update sources of
+monthly income</h1>
+<section id="incomeRowWrapper">
+<!-- EACH INCOME ROW FORM -->
+<form class="incomeRow">
+<div class="field-is-grouped">
+<div class="field has-addons">
+<p class="control"></p><a
+class="button is-static">Source</a></p>
+<p class="control"><input
+class="input incomeSource"
+type="text"></p>
+<p class="control"><a
+class="button is-static">Amount</a></p>
+<p class="control"><input
+class="input incomeAmount"
+type="number"></p>
+</div>
+</div>
+</form>
+</section>
+<!-- BUTTON FOR INCOME -->
+<div class="field">
 <div class="control">
 <button id="addIncomeTableRowBtn" class="button is-inverted is-outlined">
 <p class="addBtn">ADD ROW</p><br>
@@ -139,13 +161,14 @@
 </button>
 </div>
 <p class="control">
-<button id="removeIncomeTableRowBtn" class="button is-inverted is-outlined">
-<p class="addBtn">REMOVE LAST ROW</p><br>
+<button id="removeIncomeTableRowBtn"
+class="button is-inverted is-outlined">
+<p class="addBtn">REMOVE LAST
+ROW</p><br>
 <i class="fas fa-minus-square"></i>
 </button>
 </p>
 </div>
-
 </div>
 </div>
 </section>
@@ -154,66 +177,82 @@
 <section class="hero is-primary has-text-white">
 <div class="hero-body">
 <div class="container">
-<h1 class="title has-text-white">1. Update regular/essential monthly expenses</h1>
+<h1 class="title has-text-white">Update
+regular/essential monthly expenses</h1>
+<!-- EACH ROW OF EXPENSES -->
 <section id="expenditureRowWrapper">
-
 <form class="expenseRow">
 <div class="field-is-grouped">
 <div class="field has-addons">
-<p class="control"><a class="button is-static">Source</a></p>  
-<p class="control"><input class="input expenseSource" type="text"></p>
-<p class="control"><a class="button is-static">Amount</a></p>  
-<p class="control"><input class="input expenseAmount" type="number"></p>
+<p class="control"><a
+class="button is-static">Source</a></p>
+<p class="control"><input
+class="input expenseSource"
+type="text"></p>
+<p class="control"><a
+class="button is-static">Amount</a></p>
+<p class="control"><input
+class="input expenseAmount"
+type="number"></p>
 </div>
-</div>  
+</div>
 </form>
-
 </section>
 
-<div class="field is-grouped">
+<div class="field">
 <div class="control">
-<button id="addExpenseTableRowBtn" class="button is-inverted is-outlined">
+<button id="addExpenseTableRowBtn"
+class="button is-inverted is-outlined">
 <p class="addBtn">ADD ROW</p><br>
 <i class="fas fa-plus-square"></i>
 </button>
 </div>
 <p class="control">
-<button id="removeExpenseTableRowBtn" class="button is-inverted is-outlined">
-<p class="addBtn">REMOVE LAST ROW</p><br>
+<button id="removeExpenseTableRowBtn"
+class="button is-inverted is-outlined">
+<p class="addBtn">REMOVE LAST
+ROW</p><br>
 <i class="fas fa-minus-square"></i>
 </button>
 </p>
 </div>
-
-
 </div>
 </div>
-<!-- END OF UPDATE EXPENSES SECTION -->
-</section>
-<!-- END OF INC/EXP SECTION EXPENSES SECTION -->
-</section>
-<!-- END OF WRAPPER FOR INCOME-EXP -->
 </section>
 
-<!-- BUDGETING GOAL SECTION -->
-<section class="hero is-info has-text-centered">
+<!-- UPDATE BUDGETING GOAL SECTION -->
+<section class="hero is-danger">
 <div class="hero-body">
 <div class="container">
-<h1 class="title is-size-1">Update budgeting goal<span id="gapBetweenDashGoal"> 
-</span>£<strong id="budgetAmount" contenteditable="true">300</strong></h1>
+<h1 id="loginBudgetGoalheading" class="title">Update budgeting goal</h1>
+<div class="field">
+<div class="control has-icons-left">
+<input id="budgetGoalInput" class="input is-large" type="number"
+placeholder="Per month">
+<span class="icon is-left">
+<i class="far fa-money-bill-alt"></i>
+</span>
+</div>
+</div>
 </div>
 </div>
 </section>
 
-<!-- SUBMIT AND UPDATE ACCOUNT -->
-<section class="hero is-danger is-small has-text-centered">
+<div id="errorMsg" class="container"></div>
+
+
+<!-- CALCULATE BUTTON -->
+<section class="hero">
 <div class="hero-body">
 <div class="container">
-<a href="#" class="button is-large is-info has-text-weight-bold is-inverted is-outlined" id="updateGoal">
-Update account</a>
+<a id="regAndCalculateBtn" class="button is-large is-info has-text-weight-bold">Update Account</a>
 </div>
 </div>
-</section> -->
+</section>
+
+</div>
+</div>
+</section>
 
 
 

@@ -21,7 +21,10 @@ const UserSchema = mongoose.Schema({
   ],
   budgetinggoal: {
     type: Number
-  }
+  },
+  monthly: [
+    {month: {type: String}, amount: {type: Number}}
+  ]
 });
 
 UserSchema.methods.serialize = function() {

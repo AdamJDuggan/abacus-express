@@ -114,7 +114,7 @@ function register(){
             .then(user => {
                 console.log(user);
                 localStorage.setItem("user", user.authToken);
-                // window.location = 'dashboard.html';                
+                window.location = 'test.html';                
             })
             .catch(err => {
                 console.error('Error:', err)

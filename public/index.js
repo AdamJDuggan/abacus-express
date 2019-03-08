@@ -1,8 +1,6 @@
 // *****************************************************************
-// LANDING PAGE JS 
+// CLICK LOGIN TO DISPALY LOGIN FORM DIV
 // *****************************************************************
-
-// LOGIN PAGE DISPLAY DIV ELEMENTS 
 function showLogin() {
     $('#loginBtn').on('click', event => {
         event.preventDefault();
@@ -11,7 +9,9 @@ function showLogin() {
     })
 };
 
-// GOT TO REGISTRATION SCREEN
+// *****************************************************************
+// REGISTRATION BUTTON: GO TO REGISTRATION SCREEN
+// *****************************************************************
 function goToReg(){
     $('#registerBtn').on('click', event => {
         event.preventDefault();
@@ -19,15 +19,10 @@ function goToReg(){
     })
 }
 
-// -------------------------------------------------------------------------------------------------------------------
-
-
-
 
 // *****************************************************************
 // LOGIN FORM 
 // *****************************************************************
-
 function watchLoginFormSubmit() {
 
     $('#loginForm').submit(function (e) {
@@ -53,16 +48,13 @@ function watchLoginFormSubmit() {
             })
             .then(user => {
                 localStorage.setItem("user", user.authToken);
-                window.location = 'dashboard.html';    
-                console.log(user);              
+                window.location = 'test.html';             
             })
             .catch(err => console.error('Error:', err));
     })
 };
 
 // -------------------------------------------------------------------------------------------------------------------
-
-
 
 
 // *****************************************************************

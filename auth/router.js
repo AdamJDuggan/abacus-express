@@ -122,13 +122,13 @@ router.post('/register', (req, res) => {
 //---------------------------------------------------------------
 router.post('/dashboard', tokenValidator.validateToken, (req, res) => {
   const {token } = req.body;
-  let payload = req.decoded
+  let payload = req.decoded;
   let username = payload.user
   console.log(username, payload, "here");
-  User.find({username: username})
+  User.find({username: username}).select("-password")
 
   .then(user => {
-    console.log(user)
+    console.log(user.income)
   //  const authToken = createAuthToken(user);
   //  const payload = {user, authToken}
     res.json(user);                       

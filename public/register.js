@@ -105,15 +105,15 @@ function register(){
              budgetinggoal: $('#budgetGoalInput').val(),
              monthly: monthly
          }
-         console.log(user);
+         
 
         //  FETCH TO SERVER
         let options = {
             method: 'POST',
-            headers: {
-                "Content-Type": 'application/json'
-            },
-            body: {token: JSON.stringify(user)
+            headers: {"Content-Type": 'application/json'},
+            // body: {token: JSON.stringify(user)
+            body: JSON.stringify(user)
+
         }
 
         fetch('api/auth/register', options)
@@ -129,7 +129,7 @@ function register(){
             .catch(err => {
                 console.error('Error:', err)
                 $('#errorMsg').toggle();
-            });
+            })
 
 
     })

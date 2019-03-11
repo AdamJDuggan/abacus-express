@@ -125,7 +125,7 @@ router.post('/dashboard', tokenValidator.validateToken, (req, res) => {
   let payload = req.decoded;
   let username = payload.user
   console.log(username, payload, "here");
-  User.find({username: username}).select("-password")
+  User.findOne({username: username}).select("-password")
 
   .then(user => {
     console.log(user.income)

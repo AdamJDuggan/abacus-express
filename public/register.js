@@ -26,7 +26,7 @@ function addRowToSetupExpense(){
     $('#addExpenseTableRowBtn').on('click', event => {
         event.preventDefault();
         $('#expenditureRowWrapper').append(
-            `<form class="incomeRow">
+            `<form class="expenseRow">
             <div class="field-is-grouped">
             <div class="field has-addons">
             <p class="control"></p><a class="button is-static">Source</a></p>  
@@ -49,7 +49,7 @@ function removeRowFromSetupIncomeTable(){
     });
 };
 
-// SETUP PAGE REMOVE ROW FROM INCOME TABLE
+// SETUP PAGE REMOVE ROW FROM EXPENSE TABLE
 function removeRowFromSetupExpensesTable(){
     $('#removeExpenseTableRowBtn').on('click', function () {
         event.preventDefault(); 

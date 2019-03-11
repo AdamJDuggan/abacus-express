@@ -1,8 +1,11 @@
 function displayUser(){
-    let username = localStorage.getItem(user.username);   
-                $('#userName').append(`
-                    <p>${username}</p>
-                `)  
+    
 }
+    //     let user =  localStorage.getItem("user"); 
+//     console.log(user);
+//                 $('#userName').append(`
+//                     <p>${user.username}</p>
+//                 `)  
+
 
 $(displayUser());

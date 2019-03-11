@@ -43,12 +43,13 @@ function watchLoginFormSubmit() {
 
         fetch('/api/auth/login', options)
             .then(response => {
-                console.log('Returned from server')
+                // console.log('Returned from server', response)
                 return response.json(response)
             })
             .then(user => {
+                console.log(user)
                 localStorage.setItem("user", user.authToken);
-                window.location = 'test.html';             
+                // window.location = 'test.html';             
             })
             .catch(err => console.error('Error:', err));
     })

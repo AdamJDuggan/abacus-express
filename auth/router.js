@@ -24,18 +24,43 @@ const jwtAuth = passport.authenticate('jwt', {session: false});
 
 router.use(bodyParser.json());
 
-//-----------------------------------------------------
-// Login The user provides a username and password to login
-//-----------------------------------------------------
+
+// //-----------------------------------------------------
+// // Login The user provides a username and password to login
+// //-----------------------------------------------------
 router.post('/login', localAuth, (req, res) => {
   const {username, password } = req.body;
   User.find({username: username})
   .then(user => {
+    console.log(user._id)
    const authToken = createAuthToken(user);
-  res.json({authToken});                       
+   const payload = {user, authToken}
+  res.json(payload);                       
   })
   
-})       
+})
+
+
+//-----------------------------------------------------
+// LOGIN TEST
+//-----------------------------------------------------
+// router.post('/login', localAuth, (req, res) => {
+//   const {username, password } = req.body;
+//   User.find({username: username})
+//     .then(user => {
+
+//       const payload = {
+//         username: user.username,
+//         income: user.income    
+//         };
+//         const authToken = createAuthToken(payload);
+//         res.json({authToken});  
+     
+//     })  
+//   })
+
+
+
 // END OF ROUTER POST FROM LOGIN TO DASHBOARD
 
 
@@ -56,6 +81,9 @@ router.post('/register', (req, res) => {
   
   console.log('infomation sent from reg form');
   const {username, password, password2, income, expenses, budgetinggoal, monthly } = req.body;
+  console.log("Expenses", expenses);
+  console.log("Income", income);
+
 
   // Validation
   let errors = [];

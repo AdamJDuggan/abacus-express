@@ -70,13 +70,24 @@ function goHome(){
 function register(){
     $('#regAndCalculateBtn').on('click', function (e) {
         e.preventDefault();
-        console.log('clicked');
          // User income, expenses and first month to be turned into objects to send to db
-         let income = {};   
+         let income2 = [];
+         let income = [];   
          $('.incomeRow').each(function() {
-             income[ $(this).find('.incomeSource').val()] 
-             = $(this).find('.incomeAmount').val()
+             const newIncome = {}
+            //  income[ $(this).find('.incomeSource').val()] 
+            //  = [$(this).find('.incomeAmount').val()]
+            newIncome["source"] = $(this).find('.incomeSource').val();
+            newIncome["amount"] = $(this).find('.incomeAmount').val() 
+            income.push(newIncome);
          });
+         console.log("Income 2", income);
+        //  let income2 = {};
+        //  $('.incomeRow').each(function() {
+        //     income2[$(this).find('.incomeSource').val()] = [$(this).find('.incomeAmount').val()]
+        //     console.log(income2);
+        // });;
+         
          let expenses = {};   
          $('.expenseRow').each(function() {
             expenses[ $(this).find('.expenseSource').val()] 

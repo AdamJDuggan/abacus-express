@@ -49,7 +49,7 @@ function watchLoginFormSubmit() {
             .then(user => {
                 console.log(user)
                 localStorage.setItem("user", user.authToken);
-                // window.location = 'test.html';             
+                window.location = 'test.html';             
             })
             .catch(err => console.error('Error:', err));
     })

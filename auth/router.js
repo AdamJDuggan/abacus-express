@@ -7,8 +7,8 @@ const bcrypt = require('bcryptjs');
 const decode = require('jwt-decode');
 const config = require('../config');
 const router = express.Router();
-
 const {User} = require('../users/models');
+const tokenValidator = require('./tokenValidator')
 
 const createAuthToken = function(user) {
   return jwt.sign({user}, config.JWT_SECRET, {
@@ -30,36 +30,16 @@ router.use(bodyParser.json());
 // //-----------------------------------------------------
 router.post('/login', localAuth, (req, res) => {
   const {username, password } = req.body;
+  console.log(username, password, '@"adfadf@')
   User.find({username: username})
   .then(user => {
-    console.log(user._id)
-   const authToken = createAuthToken(user);
-   const payload = {user, authToken}
+    console.log(user)
+   const authToken = createAuthToken(username);
+   const payload = {authToken}
   res.json(payload);                       
   })
   
 })
-
-
-//-----------------------------------------------------
-// LOGIN TEST
-//-----------------------------------------------------
-// router.post('/login', localAuth, (req, res) => {
-//   const {username, password } = req.body;
-//   User.find({username: username})
-//     .then(user => {
-
-//       const payload = {
-//         username: user.username,
-//         income: user.income    
-//         };
-//         const authToken = createAuthToken(payload);
-//         res.json({authToken});  
-     
-//     })  
-//   })
-
-
 
 // END OF ROUTER POST FROM LOGIN TO DASHBOARD
 
@@ -134,6 +114,27 @@ router.post('/register', (req, res) => {
   }
 // END OF ROUTER POST TO SETUP ON REGISTRATION 
 });
+
+
+
+//---------------------------------------------------------------
+// Dashboard: Get user data to dispaly account to view 
+//---------------------------------------------------------------
+router.post('/dashboard', tokenValidator.validateToken, (req, res) => {
+  const {token } = req.body;
+  let payload = req.decoded
+  let username = payload.user
+  console.log(username, payload, "here");
+  User.find({username: username})
+
+  .then(user => {
+    console.log(user)
+  //  const authToken = createAuthToken(user);
+  //  const payload = {user, authToken}
+    res.json(user);                       
+  })
+  
+})
 
 
 

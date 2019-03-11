@@ -71,30 +71,29 @@ function register(){
     $('#regAndCalculateBtn').on('click', function (e) {
         e.preventDefault();
          // User income, expenses and first month to be turned into objects to send to db
-         let income2 = [];
          let income = [];   
          $('.incomeRow').each(function() {
              const newIncome = {}
-            //  income[ $(this).find('.incomeSource').val()] 
-            //  = [$(this).find('.incomeAmount').val()]
             newIncome["source"] = $(this).find('.incomeSource').val();
-            newIncome["amount"] = $(this).find('.incomeAmount').val() 
+            newIncome["amount"] = $(this).find('.incomeAmount').val();
             income.push(newIncome);
          });
-         console.log("Income 2", income);
-        //  let income2 = {};
-        //  $('.incomeRow').each(function() {
-        //     income2[$(this).find('.incomeSource').val()] = [$(this).find('.incomeAmount').val()]
-        //     console.log(income2);
-        // });;
-         
-         let expenses = {};   
+
+         let expenses = [];   
          $('.expenseRow').each(function() {
-            expenses[ $(this).find('.expenseSource').val()] 
-             = $(this).find('.expenseAmount').val()
-         }); 
-         let monthly ={}
-         monthly[$('#addMonthMonth').val()]=[$('#addMonthAmount').val()]
+             const newExpenses = {}
+             newExpenses["source"] = $(this).find('.expenseSource').val();
+             newExpenses["amount"] = $(this).find('.expenseAmount').val(); 
+             expenses.push(newExpenses);
+         });
+        
+         let monthly = [];
+         $('.monthRow').each(function() {
+         const newMonthly = {};
+         newMonthly["month"] = $(this).find('.addMonthMonth').val();
+         newMonthly["amount"] = $(this).find('.addMonthAmount').val();
+         monthly.push(newMonthly);
+         });
      // ------------------------------
  
          let user = {
@@ -114,7 +113,7 @@ function register(){
             headers: {
                 "Content-Type": 'application/json'
             },
-            body: JSON.stringify(user)
+            body: {token: JSON.stringify(user)
         }
 
         fetch('api/auth/register', options)

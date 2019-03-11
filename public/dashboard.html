@@ -39,7 +39,7 @@
 <div class="columns">
 <div class="column is-one-quarter has-background-grey has-text-white">
 <p class="heading is-size-6 has-text-weight-bold ">Monthly income</p>
-<p class="title has-text-white">£2500</p>
+<p id="summaryIncome" class="title has-text-white"></p>
 </div>
 <div class="column is-one-quarter has-background-primary has-text-white">
 <p class="heading is-size-6 has-text-weight-bold ">Regular expenses</p>
@@ -51,7 +51,7 @@
 </div>
 <div class="column is-one-quarter has-background-danger has-text-white">
 <p class="heading is-size-6 has-text-weight-bold ">Budgeting goal</p>
-<p class="title has-text-white">£300</p>
+<p id="summaryGoal" class="title has-text-white"></p>
 
 </div>
 </div> 
@@ -62,42 +62,12 @@
 <!-- MONTHLY REVIEW -->
 <section class="hero is-info">
 <div class="hero-body">
-<div id="summarySection" class="container">
+<div class="container">
 <h1 id="monthTitle"class="title is-size-2 has-text-centered">Monthly Review</h1>
+
 <section id="monthRow">
-<nav class="level">
-<div class="level-item has-text-centered has-text-white">
-<div>
-<p class="heading">Month</p>
-<p class="title">March 19</p>
-</div>
-</div>
-<div class="level-item has-text-centered">
-<div>
-<p class="heading">Non-essential spending</p>
-<p class="title">£400</p>
-</div>
-</div>
-</nav>
-<hr>
 
-<nav class="level">
-<div class="level-item has-text-centered has-text-white">
-<div>
-<p class="heading">Month</p>
-<p class="title">April 19</p>
-</div>
-</div>
-<div class="level-item has-text-centered">
-<div>
-<p class="heading">Non-essential spending</p>
-<p class="title">£300</p>
-</div>
-</div>
-</nav>
-<hr>
 </section>
-
 </div>
 </div>
 </section>
@@ -117,22 +87,7 @@
 monthly income</h1>
 <section id="incomeRowWrapper">
 <!-- EACH INCOME ROW FORM -->
-<form class="incomeRow">
-<div class="field-is-grouped">
-<div class="field has-addons">
-<p class="control"></p><a
-class="button is-static">Source</a></p>
-<p class="control"><input
-class="input incomeSource"
-type="text"></p>
-<p class="control"><a
-class="button is-static">Amount</a></p>
-<p class="control"><input
-class="input incomeAmount"
-type="number"></p>
-</div>
-</div>
-</form>
+
 </section>
 <!-- BUTTON FOR INCOME -->
 <div class="field">
@@ -163,22 +118,6 @@ ROW</p><br>
 regular/essential monthly expenses</h1>
 <!-- EACH ROW OF EXPENSES -->
 <section id="expenditureRowWrapper">
-<form class="expenseRow">
-<div class="field-is-grouped">
-<div class="field has-addons">
-<p class="control"><a
-class="button is-static">Source</a></p>
-<p class="control"><input
-class="input expenseSource"
-type="text"></p>
-<p class="control"><a
-class="button is-static">Amount</a></p>
-<p class="control"><input
-class="input expenseAmount"
-type="number"></p>
-</div>
-</div>
-</form>
 </section>
 
 <div class="field">
@@ -209,11 +148,7 @@ ROW</p><br>
 <h1 id="loginBudgetGoalheading" class="title">Update budgeting goal</h1>
 <div class="field">
 <div class="control has-icons-left">
-<input id="budgetGoalInput" class="input is-large" type="number"
-placeholder="Per month">
-<span class="icon is-left">
-<i class="far fa-money-bill-alt"></i>
-</span>
+<input id="budgetGoalInput" class="input" type="number">
 </div>
 </div>
 </div>

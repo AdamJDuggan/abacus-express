@@ -82,3 +82,6 @@ input{max-width: 200px;}
 #errorMsg{display: none;}
 
 #addMonthForm{margin-top: 70px;}
+
+.addMonthMonth,
+.addMonthAmount{border: none;};

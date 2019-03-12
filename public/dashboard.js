@@ -19,7 +19,6 @@ function addRowToDashBoardTable(btn, table){
 function removeRowFromDashBoardTable(){
     $('removeIncomeRow').on('click', function () {
         event.preventDefault(); 
-        
         $('#incomeTableBody').removeChild();
     });
 };
@@ -93,6 +92,7 @@ function displayUser(){
                     </div>
                     </form>`)                
                 );
+
                 // Income total for Summary: WORKING 
                 let incomeArray = [];
                 income.forEach(x => incomeArray.push(x.amount));
@@ -134,24 +134,32 @@ function displayUser(){
                 // Monthly row: WORKING 
                 let month = user.monthly;
                 month.forEach(x => 
-                ($('#monthRow')).append(`
-                <nav class="level is-mobile eachMonthRow">
+                ($('#monthRowWrapper')).append(`
+                <nav class="level is-mobile monthRow">
                 <div class="level-item has-text-centered has-text-white">
                 <div>
                 <p class="heading">Month</p>
-                <p class="title monthMonth">${x.month}</p>
+                <input class="title has-text-centered has-background-info addMonthMonth" value="${x.month}" readonly>
                 </div>
                 </div>
                 <div class="level-item has-text-centered">
                 <div>
                 <p class="heading">Non-essential spending</p>
-                <p class="title monthAmount">£${x.amount}</p>
+                <input class="title has-text-centered has-background-info addMonthAmount" value="${x.amount}" readonly>
                 </div>
                 </div>
                 </nav>
                 <hr>`)
                 );
-                // localStorage.setItem("user", user.authToken);               
+                let monthly = [];
+                $('.monthRow').each(function() {
+                const newMonthly = {};
+                newMonthly["month"] = $(this).find('.addMonthMonth').val();
+                newMonthly["amount"] = $(this).find('.addMonthAmount').val();
+                monthly.push(newMonthly);
+                console.log(monthly);
+                });
+
             })
             .catch(err => {
                 console.error('Error:', err)
@@ -222,7 +230,7 @@ function logout(){
     $('#logoutBtn').on('click', e => {
         e.preventDefault();
         localStorage.clear();
-        window.location="index.html"; 
+        window.location="index.html";
 })
 }
 

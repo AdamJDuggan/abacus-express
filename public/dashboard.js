@@ -65,7 +65,7 @@ function displayUser(){
                 
                 // Budgeting goal summary: WORKING 
                 $('#summaryGoal').append(`
-                 <p>£ ${user.budgetinggoal}</p>
+                 <p>£${user.budgetinggoal}</p>
                 `)
                 
                 // Budgeting goal update: WORKING
@@ -92,12 +92,11 @@ function displayUser(){
                     </div>
                     </form>`)                
                 );
-                // Income total for Summary: 
-                incomeArray = [];
+                // Income total for Summary: WORKING 
+                let incomeArray = [];
                 income.forEach(x => incomeArray.push(x.amount));
                 const totalIncome = incomeArray.reduce((total, amount) => total + amount); 
-                console.log(totalIncome);
-                $('#summaryIncome').append(`£ ${totalIncome}`)
+                $('#summaryIncome').append(`£${totalIncome}`)
             
                 // Expenditure update section: WORKING
                 let expenses = user.expenses;
@@ -121,11 +120,21 @@ function displayUser(){
                     </form>`)                
                 );
 
+                // Summary Expenses total: WORKING
+                  expensesArray = [];
+                  expenses.forEach(x => expensesArray.push(x.amount));
+                  const totalExpenses = expensesArray.reduce((total, amount) => total + amount); 
+                  $('#summaryExpenses').append(`£${totalExpenses}`);
+
+                // Remaining at end of month Summary Section: WORKING
+                let remaining = totalIncome - totalExpenses;
+                $('#remainingSummary').append(`£${remaining}`);
+
                 // Monthly row: WORKING 
                 let month = user.monthly;
                 month.forEach(x => 
                 ($('#monthRow')).append(`
-                <nav class="level">
+                <nav class="level is-mobile">
                 <div class="level-item has-text-centered has-text-white">
                 <div>
                 <p class="heading">Month</p>
@@ -135,7 +144,7 @@ function displayUser(){
                 <div class="level-item has-text-centered">
                 <div>
                 <p class="heading">Non-essential spending</p>
-                <p class="title">£ ${x.amount}</p>
+                <p class="title">£${x.amount}</p>
                 </div>
                 </div>
                 </nav>
@@ -147,22 +156,36 @@ function displayUser(){
                 console.error('Error:', err)
                 $('#errorMsg').toggle();
             });
-
-    
-
 }
 
 
 
-
-
 // UPDATE ACCOUNT  
+function updateAccount(){
+    $('#updateAccountBtn').on('click', e => {
+        e.preventDefault();
+        let token = localStorage.getItem('user');
+        console.log(token);
 
+        let options = {
+            method: 'PUT',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({ token })
+        }
 
+        fetch('api/auth/update', options)
+            .then(response => {
+                return response.json()
+            })
+            .then(user => { console.log(user) } )
+    })
+}
 
 // LOGOUT BUTTON
 function logout(){
-    $('logoutBtn').on('click', e => {
+    $('#logoutBtn').on('click', e => {
         e.preventDefault();
         localStorage.clear();
         window.location="index.html";
@@ -175,6 +198,7 @@ function dashboardWrapperFunction(){
     addRowToDashBoardTable('#addIncomeTableRowBtn', '#incomeTableBody');
     addRowToDashBoardTable('#addExpenseTableRowBtn', '#expenseTableBody');
     removeRowFromDashBoardTable();
+    updateAccount();
     logout();
 }
 

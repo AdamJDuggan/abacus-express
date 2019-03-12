@@ -124,17 +124,47 @@ router.post('/dashboard', tokenValidator.validateToken, (req, res) => {
   const {token } = req.body;
   let payload = req.decoded;
   let username = payload.user
-  console.log(username, payload, "here");
+  // console.log(username, payload, "here");
   User.findOne({username: username}).select("-password")
 
   .then(user => {
-    console.log(user.income)
+    // console.log(user.income)
   //  const authToken = createAuthToken(user);
   //  const payload = {user, authToken}
     res.json(user);                       
   })
   
 })
+
+
+
+//---------------------------------------------------------------
+// Update: 
+//---------------------------------------------------------------
+router.put('/update', tokenValidator.validateToken, (req,res) => {
+
+console.log('came from dashboard');
+const {token } = req.body;
+let payload = req.decoded;
+console.log(req.body);
+let username = payload.user
+console.log(username, payload, "here");
+User.findOneAndUpdate({username: username}, {budgetinggoal: 400})
+// User.findByIdAndUpdate('5c8686b47a0c4a678b7e80ef', {budgetinggoal: 200})
+.then(result => {
+  
+  // console.log(result);
+})
+User.findOne({username: username}).select("-password")
+
+.then(user => {
+console.log(user.income + "ok")
+//  const authToken = createAuthToken(user);
+//  const payload = {user, authToken}
+res.json('back from server. User object to go here then window reload');                       
+})
+})
+
 
 
 

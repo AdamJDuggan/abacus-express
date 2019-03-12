@@ -7,20 +7,28 @@ const bcrypt = require('bcryptjs');
 const decode = require('jwt-decode');
 const config = require('../config');
 const router = express.Router();
-const {User} = require('../users/models');
+const {
+  User
+} = require('../users/models');
 const tokenValidator = require('./tokenValidator')
 
-const createAuthToken = function(user) {
-  return jwt.sign({user}, config.JWT_SECRET, {
+const createAuthToken = function (user) {
+  return jwt.sign({
+    user
+  }, config.JWT_SECRET, {
     subject: user.username,
     expiresIn: config.JWT_EXPIRY,
     algorithm: 'HS256'
   });
 };
 
-const localAuth = passport.authenticate('local', {session: false});
+const localAuth = passport.authenticate('local', {
+  session: false
+});
 
-const jwtAuth = passport.authenticate('jwt', {session: false});
+const jwtAuth = passport.authenticate('jwt', {
+  session: false
+});
 
 router.use(bodyParser.json());
 
@@ -29,16 +37,23 @@ router.use(bodyParser.json());
 // // Login The user provides a username and password to login
 // //-----------------------------------------------------
 router.post('/login', localAuth, (req, res) => {
-  const {username, password } = req.body;
+  const {
+    username,
+    password
+  } = req.body;
   console.log(username, password, '@"adfadf@')
-  User.find({username: username})
-  .then(user => {
-    console.log(user)
-   const authToken = createAuthToken(username);
-   const payload = {authToken}
-  res.json(payload);                       
-  })
-  
+  User.find({
+      username: username
+    })
+    .then(user => {
+      console.log(user)
+      const authToken = createAuthToken(username);
+      const payload = {
+        authToken
+      }
+      res.json(payload);
+    })
+
 })
 
 // END OF ROUTER POST FROM LOGIN TO DASHBOARD
@@ -50,7 +65,9 @@ router.post('/login', localAuth, (req, res) => {
 //-----------------------------------------------------
 router.post('/refresh', jwtAuth, (req, res) => {
   const authToken = createAuthToken(req.user);
-  res.json({authToken});
+  res.json({
+    authToken
+  });
 });
 
 
@@ -58,9 +75,17 @@ router.post('/refresh', jwtAuth, (req, res) => {
 // Registration form submit: validate, and if no user then push new user to db
 //---------------------------------------------------------------
 router.post('/register', (req, res) => {
-  
+
   console.log('infomation sent from reg form');
-  const {username, password, password2, income, expenses, budgetinggoal, monthly } = req.body;
+  const {
+    username,
+    password,
+    password2,
+    income,
+    expenses,
+    budgetinggoal,
+    monthly
+  } = req.body;
   console.log("Expenses", expenses);
   console.log("Income", income);
 
@@ -68,51 +93,70 @@ router.post('/register', (req, res) => {
   // Validation
   let errors = [];
   //check requird fields
-  if(!username || !password || !password2){errors.push({msg: 'Please fill in all fields'});
+  if (!username || !password || !password2) {
+    errors.push({
+      msg: 'Please fill in all fields'
+    });
   }
   // check passwords match
-  if(password !== password2){errors.push({msg: "Passwords do not match"})}
+  if (password !== password2) {
+    errors.push({
+      msg: "Passwords do not match"
+    })
+  }
   // check pass length 
   // if(password.length < 6){errors.push({msg: "Password should be at least six characters"})}
   // Console lot any errors 
-  if(errors.length > 0){(console.log(errors + "I want this to show on html to user"))} 
-  
-  else{
-  // Check DB for existing user
-    User.find({username: username})
-    .then(user => {
-      console.log(user)
-        if(user.length > 0){
+  if (errors.length > 0) {
+    (console.log(errors + "I want this to show on html to user"))
+  } else {
+    // Check DB for existing user
+    User.find({
+        username: username
+      })
+      .then(user => {
+        console.log(user)
+        if (user.length > 0) {
           console.log('username already registered. I want this to show on screen')
           res.json('user already registered');
-        } 
-      // Create new user 
+        }
+        // Create new user 
         else {
-              // I have a model and I am here creating a new instance
-              // HERE
-              const newUser = new User({username, password, income, expenses, budgetinggoal, monthly});
-              // Hash password before saving to DB. Generate a salt so we can create a hash 
-              //takes number of keys as argument
-              bcrypt.genSalt(10, (err, salt) => 
-                bcrypt.hash(newUser.password, salt, (err, hash) => {
-                  if(err) throw err;
-                  // Set password to hashed
-                  newUser.password = hash;
-                  // saving new user to db returns a promise 
-                  newUser.save(function(err, user){
-                    if(err){console.log(err)}
-                    else{
-                      console.log('User added to db')
-                      const authToken = createAuthToken(newUser.username);
-                      res.json({authToken});
-                    }
-                  })
-                })  
-              )
-          }
-      }) 
+          // I have a model and I am here creating a new instance
+          // HERE
+          const newUser = new User({
+            username,
+            password,
+            income,
+            expenses,
+            budgetinggoal,
+            monthly
+          });
+          // Hash password before saving to DB. Generate a salt so we can create a hash 
+          //takes number of keys as argument
+          bcrypt.genSalt(10, (err, salt) =>
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) throw err;
+              // Set password to hashed
+              newUser.password = hash;
+              // saving new user to db returns a promise 
+              newUser.save(function (err, user) {
+                if (err) {
+                  console.log(err)
+                } else {
+                  console.log('User added to db')
+                  const authToken = createAuthToken(newUser.username);
+                  res.json({
+                    authToken
+                  });
+                }
+              })
+            })
+          )
+        }
+      })
   }
-// END OF ROUTER POST TO SETUP ON REGISTRATION 
+  // END OF ROUTER POST TO SETUP ON REGISTRATION 
 });
 
 
@@ -121,19 +165,19 @@ router.post('/register', (req, res) => {
 // Dashboard: Get user data to dispaly account to view 
 //---------------------------------------------------------------
 router.post('/dashboard', tokenValidator.validateToken, (req, res) => {
-  const {token } = req.body;
+  const {
+    token
+  } = req.body;
   let payload = req.decoded;
   let username = payload.user
-  // console.log(username, payload, "here");
-  User.findOne({username: username}).select("-password")
+  User.findOne({
+      username: username
+    }).select("-password")
 
-  .then(user => {
-    // console.log(user.income)
-  //  const authToken = createAuthToken(user);
-  //  const payload = {user, authToken}
-    res.json(user);                       
-  })
-  
+    .then(user => {
+      res.json(user);
+    })
+
 })
 
 
@@ -141,32 +185,44 @@ router.post('/dashboard', tokenValidator.validateToken, (req, res) => {
 //---------------------------------------------------------------
 // Update: 
 //---------------------------------------------------------------
-router.put('/update', tokenValidator.validateToken, (req,res) => {
+router.put('/update', tokenValidator.validateToken, (req, res) => {
 
-console.log('came from dashboard');
-const {token } = req.body;
-let payload = req.decoded;
-console.log(req.body);
-let username = payload.user
-console.log(username, payload, "here");
-User.findOneAndUpdate({username: username}, {budgetinggoal: 400})
-// User.findByIdAndUpdate('5c8686b47a0c4a678b7e80ef', {budgetinggoal: 200})
-.then(result => {
-  
-  // console.log(result);
+  console.log('came from dashboard', req.headers);
+  console.log('came from dashboardttttt', req.body);
+
+  let payload = req.decoded;
+  //console.log(req.body);
+  let username = payload.user
+  //console.log(username, payload, "here");
+  User.findOneAndUpdate({
+      username: username
+    }, req.body)
+    // User.findByIdAndUpdate('5c8686b47a0c4a678b7e80ef', {budgetinggoal: 200})
+    .then(result => {
+      console.log('successfullherey updated', result);
+      res.send(result);
+    }).catch(err => {
+      console.log('errrrrr', err);
+      res.send(err)
+      });
+ /* User.findOne({
+      username: username
+    }).select("-password")
+
+    .then(user => {
+      console.log(user.income + "ok")
+
+      res.json('back from server. User object to go here then window reload');
+    });
+    */
 })
-User.findOne({username: username}).select("-password")
-
-.then(user => {
-console.log(user.income + "ok")
-//  const authToken = createAuthToken(user);
-//  const payload = {user, authToken}
-res.json('back from server. User object to go here then window reload');                       
-})
-})
 
 
 
 
 
-module.exports = {router}
+
+
+module.exports = {
+  router
+}

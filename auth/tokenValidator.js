@@ -7,7 +7,7 @@ const jwtSecret = process.env.JWT_SECRET;
 
 module.exports.validateToken = (req, res, next) => {
     console.log('got here');
-  const token = req.body.token || req.query.token || req.headers['x-access-token'];
+  const token = req.headers.authorization;
   console.log('JWT_SECRET', jwtSecret);
   if (token) {
       console.log('about to verify');

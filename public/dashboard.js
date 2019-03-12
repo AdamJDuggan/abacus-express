@@ -50,9 +50,10 @@ function displayUser(){
     let options = {
         method: 'POST',
         headers: {
-            "Content-Type": 'application/json'
+            "Content-Type": 'application/json',
+            Authorization: token
         },
-        body: JSON.stringify({ token })
+        body: JSON.stringify({ })
     }
 
     fetch('api/auth/dashboard', options)
@@ -134,17 +135,17 @@ function displayUser(){
                 let month = user.monthly;
                 month.forEach(x => 
                 ($('#monthRow')).append(`
-                <nav class="level is-mobile">
+                <nav class="level is-mobile eachMonthRow">
                 <div class="level-item has-text-centered has-text-white">
                 <div>
                 <p class="heading">Month</p>
-                <p class="title">${x.month}</p>
+                <p class="title monthMonth">${x.month}</p>
                 </div>
                 </div>
                 <div class="level-item has-text-centered">
                 <div>
                 <p class="heading">Non-essential spending</p>
-                <p class="title">£${x.amount}</p>
+                <p class="title monthAmount">£${x.amount}</p>
                 </div>
                 </div>
                 </nav>
@@ -165,21 +166,54 @@ function updateAccount(){
     $('#updateAccountBtn').on('click', e => {
         e.preventDefault();
         let token = localStorage.getItem('user');
-        console.log(token);
+        
+        
+        // User income, expenses and first month to be turned into objects to send to db
+        let income = [];   
+        $('.incomeRow').each(function() {
+            const newIncome = {}
+           newIncome["source"] = $(this).find('.incomeSource').val();
+           newIncome["amount"] = $(this).find('.incomeAmount').val();
+           income.push(newIncome);
+        });
+
+        let expenses = [];   
+        $('.expenseRow').each(function() {
+            const newExpenses = {}
+            newExpenses["source"] = $(this).find('.expenseSource').val();
+            newExpenses["amount"] = $(this).find('.expenseAmount').val(); 
+            expenses.push(newExpenses);
+        });
+
+        let newmonth = [{month: $('#newMonthMonth') , amount: $('#newMonthAmount')}]
+
+        let user = {
+            //username: token,
+            income: income,
+            expenses: expenses,
+            budgetinggoal: $('#budgetGoalInput').val(),
+            // month: monthlyUpdate
+        }
 
         let options = {
             method: 'PUT',
             headers: {
-                "Content-Type": 'application/json'
+                "Content-Type": 'application/json',
+                "Authorization": token
             },
-            body: JSON.stringify({ token })
+            body: JSON.stringify(user)
+            //body: JSON.stringify({ token })
+
         }
 
         fetch('api/auth/update', options)
             .then(response => {
                 return response.json()
             })
-            .then(user => { console.log(user) } )
+            .then(user => {
+                console.log('user updated successfulllllllllllly', user);
+                window.location.reload();
+            }).catch(err => console.log('err updattttttttttttttttttting user', err))
     })
 }
 
@@ -188,9 +222,10 @@ function logout(){
     $('#logoutBtn').on('click', e => {
         e.preventDefault();
         localStorage.clear();
-        window.location="index.html";
-    })
+        window.location="index.html"; 
+})
 }
+
 
 
 // WRAPPER FOR ALL ABOVE STYLE DISPLAY TOGGLES 
@@ -200,6 +235,7 @@ function dashboardWrapperFunction(){
     removeRowFromDashBoardTable();
     updateAccount();
     logout();
+   
 }
 
 $(displayUser());

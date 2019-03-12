@@ -88,7 +88,7 @@ function register(){
          });
         
          let monthly = [];
-         $('.monthRow').each(function() {
+         $('#monthRow').each(function() {
          const newMonthly = {};
          newMonthly["month"] = $(this).find('.addMonthMonth').val();
          newMonthly["amount"] = $(this).find('.addMonthAmount').val();

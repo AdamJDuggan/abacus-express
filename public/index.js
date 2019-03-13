@@ -51,7 +51,10 @@ function watchLoginFormSubmit() {
                 localStorage.setItem("user", user.authToken);
                 window.location = 'dashboard.html';             
             })
-            .catch(err => console.error('Error:', err));
+            .catch(err => {
+                console.error('Error:', err)
+                $('#errorMsg').show();
+            });
     })
 };
 

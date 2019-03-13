@@ -2,43 +2,75 @@
 // DASHBAORD JS 
 // *****************************************************************
 
-// ADD ROWS TO INCOME AND EXPENDITURE TABLE (WHICH ARE PASSED IN AS ARGUMENTS IN initilize FUNCTION)
-function addRowToDashBoardTable(btn, table){
-    $(btn).on('click', event => {
-        event.preventDefault(); 
-        $(table).append(
-            `<tr>
-            <th contenteditable="true"></th>
-            <th contenteditable="true"></th>
-            </tr>`
+
+// ADD ROW TO INCOME TABLE: WORKING
+function addRowToIncome(){
+    $('#addIncomeTableRowBtn').on('click', event => {
+        event.preventDefault();
+        $('#incomeRowWrapper').append(
+            `<form class="incomeRow">
+            <div class="field-is-grouped">
+            <div class="field has-addons">
+            <p class="control"></p><a
+            class="button is-static">Source</a></p>
+            <p class="control"><input
+            class="input incomeSource"
+            type="text"></p>
+            <p class="control"><a
+            class="button is-static">Amount</a></p>
+            <p class="control"><input
+            class="input incomeAmount"
+            type="number"></p>
+            </div>
+            </div>
+            </form>`
         ) 
     })
 }
 
-// DASHBOARD REMOVE ROW WITH TRASH ICON FROM INCOME AND EXPENDITURE TABLE
-function removeRowFromDashBoardTable(){
-    $('removeIncomeRow').on('click', function () {
-        event.preventDefault(); 
-        $('#incomeTableBody').removeChild();
-    });
-};
+// ADD ROW TO SETUP ACCOUNT EXPENSES TABLE 
+function addRowToExpense(){
+    $('#addExpenseTableRowBtn').on('click', event => {
+        event.preventDefault();
+        $('#expenditureRowWrapper').append(
+            `<form class="expenseRow">
+            <div class="field-is-grouped">
+            <div class="field has-addons">
+            <p class="control"></p><a
+            class="button is-static">Source</a></p>
+            <p class="control"><input
+            class="input expenseSource"
+            type="text"></p>
+            <p class="control"><a
+            class="button is-static">Amount</a></p>
+            <p class="control"><input
+            class="input expenseAmount"
+            type="number"></p>
+            </div>
+            </div>
+            </form>`
+        ) 
+    })
+}
 
-
-// SETUP PAGE REMOVE ROW FROM INCOME TABLE
-function removeRowFromSetupIncomeTable(){
+// REMOVE ROW FROM INCOME TABLE
+function removeIncomeRow(){
     $('#removeIncomeTableRowBtn').on('click', function () {
         event.preventDefault(); 
        $('.incomeRow').last().remove();
     });
 };
 
-// SETUP PAGE REMOVE ROW FROM INCOME TABLE
-function removeRowFromSetupExpensesTable(){
+// REMOVE ROW FROM EXPENSES TABLE
+function removeExpensesRow(){
     $('#removeExpenseTableRowBtn').on('click', function () {
         event.preventDefault(); 
        $('.expenseRow').last().remove();
     });
 };
+
+
+
 
 // POPULATE PAGE WITH USER ACCOUNT
 function displayUser(){
@@ -61,7 +93,6 @@ function displayUser(){
                 return response.json()
             })
             .then(user => {
-                console.log(user);
                 
                 // Budgeting goal summary: WORKING 
                 $('#summaryGoal').append(`
@@ -151,14 +182,6 @@ function displayUser(){
                 </nav>
                 <hr>`)
                 );
-                let monthly = [];
-                $('.monthRow').each(function() {
-                const newMonthly = {};
-                newMonthly["month"] = $(this).find('.addMonthMonth').val();
-                newMonthly["amount"] = $(this).find('.addMonthAmount').val();
-                monthly.push(newMonthly);
-                console.log(monthly);
-                });
 
             })
             .catch(err => {
@@ -206,8 +229,12 @@ function updateAccount(){
         let newMonthAdded = {};
         newMonthAdded["month"] = $('#newMonthMonth').val();
         newMonthAdded["amount"] = $('#newMonthAmount').val();
-        monthly.push(newMonthAdded)
-        console.log(monthly);
+        if (($('#newMonthMonth').val()).length == 0 || ($('#newMonthAmount').val()).length == 0 ){
+            console.log(monthly, 'not added');
+        }else{
+            monthly.push(newMonthAdded);
+            console.log(monthly, 'should have addition');
+        }
         
 
         
@@ -226,7 +253,6 @@ function updateAccount(){
                 "Authorization": token
             },
             body: JSON.stringify(user)
-            //body: JSON.stringify({ token })
 
         }
 
@@ -235,9 +261,9 @@ function updateAccount(){
                 return response.json()
             })
             .then(user => {
-                console.log('user updated successfulllllllllllly', user);
+                console.log('user updated successfully', user);
                 window.location.reload();
-            }).catch(err => console.log('err updattttttttttttttttttting user', err))
+            }).catch(err => console.log('err updating user', err))
     })
 }
 
@@ -254,9 +280,10 @@ function logout(){
 
 // WRAPPER FOR ALL ABOVE STYLE DISPLAY TOGGLES 
 function dashboardWrapperFunction(){ 
-    addRowToDashBoardTable('#addIncomeTableRowBtn', '#incomeTableBody');
-    addRowToDashBoardTable('#addExpenseTableRowBtn', '#expenseTableBody');
-    removeRowFromDashBoardTable();
+    addRowToIncome();
+    addRowToExpense();
+    removeIncomeRow();
+    removeExpensesRow();
     updateAccount();
     logout();
    

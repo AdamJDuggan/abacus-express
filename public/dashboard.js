@@ -57,7 +57,9 @@ function addRowToExpense(){
 function removeIncomeRow(){
     $('#removeIncomeTableRowBtn').on('click', function () {
         event.preventDefault(); 
-       $('.incomeRow').last().remove();
+        if(($('.incomeRow').length > 1 )){
+            $('.incomeRow').last().remove();
+        };   
     });
 };
 
@@ -65,7 +67,9 @@ function removeIncomeRow(){
 function removeExpensesRow(){
     $('#removeExpenseTableRowBtn').on('click', function () {
         event.preventDefault(); 
-       $('.expenseRow').last().remove();
+        if(($('.expenseRow').length > 1 )){
+            $('.expenseRow').last().remove();
+        }; 
     });
 };
 

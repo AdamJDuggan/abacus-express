@@ -176,7 +176,7 @@ function updateAccount(){
         let token = localStorage.getItem('user');
         
         
-        // User income, expenses and first month to be turned into objects to send to db
+        // User income to be turned into objects to send to db
         let income = [];   
         $('.incomeRow').each(function() {
             const newIncome = {}
@@ -185,6 +185,7 @@ function updateAccount(){
            income.push(newIncome);
         });
 
+        // User expenses to be updated on db 
         let expenses = [];   
         $('.expenseRow').each(function() {
             const newExpenses = {}
@@ -193,14 +194,29 @@ function updateAccount(){
             expenses.push(newExpenses);
         });
 
-        let newmonth = [{month: $('#newMonthMonth') , amount: $('#newMonthAmount')}]
+        // Get current months and push to array to send to server
+        let monthly = [];
+        $('.monthRow').each(function() {
+        const newMonthly = {};
+        newMonthly["month"] = $(this).find('.addMonthMonth').val();
+        newMonthly["amount"] = $(this).find('.addMonthAmount').val();
+        monthly.push(newMonthly);
+        });
+        // Add to this the new month added
+        let newMonthAdded = {};
+        newMonthAdded["month"] = $('#newMonthMonth').val();
+        newMonthAdded["amount"] = $('#newMonthAmount').val();
+        monthly.push(newMonthAdded)
+        console.log(monthly);
+        
 
+        
         let user = {
             //username: token,
             income: income,
             expenses: expenses,
             budgetinggoal: $('#budgetGoalInput').val(),
-            // month: monthlyUpdate
+            monthly: monthly
         }
 
         let options = {

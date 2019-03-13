@@ -84,5 +84,5 @@ input{max-width: 200px;}
 #addMonthForm{margin-top: 70px;}
 
 .addMonthMonth,
-.addMonthAmount{border: none;};
+.addMonthAmount{border: none; padding: 5px; height: 40px;};
 

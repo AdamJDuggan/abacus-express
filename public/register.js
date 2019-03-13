@@ -60,6 +60,7 @@ function removeRowFromSetupExpensesTable(){
 // HOME BUTTON AT TOP
 function goHome(){
     $('#home').on('click', () => {
+        e.preventDefault();
         window.location = 'index.html';
     })
 }
@@ -116,15 +117,12 @@ function register(){
 
         }
 
-        // $('#errorMsg').append(`${errors}`);
-
         fetch('api/auth/register', options)
             .then(response => {
                 console.log('Returned from server')
                 return response.json()
             })
             .then(user => {
-                console.log(user);
                 localStorage.setItem("user", user.authToken);
                 window.location = 'dashboard.html';                
             })

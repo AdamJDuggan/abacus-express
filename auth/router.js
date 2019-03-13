@@ -33,9 +33,9 @@ const jwtAuth = passport.authenticate('jwt', {
 router.use(bodyParser.json());
 
 
-// //-----------------------------------------------------
-// // Login The user provides a username and password to login
-// //-----------------------------------------------------
+//-----------------------------------------------------
+// Login The user provides a username and password to login
+//-----------------------------------------------------
 router.post('/login', localAuth, (req, res) => {
   const {
     username,
@@ -55,9 +55,6 @@ router.post('/login', localAuth, (req, res) => {
     })
 
 })
-
-// END OF ROUTER POST FROM LOGIN TO DASHBOARD
-
 
 
 //-----------------------------------------------------
@@ -83,33 +80,30 @@ router.post('/register', (req, res) => {
   let errors = [];
   //check requird fields
   if (!username || !password || !password2) {
-    errors.push({
-      msg: 'Please fill in all fields'
-    });
+    errors.push({msg: 'Please fill in all fields'});
   }
   // check passwords match
   if (password !== password2) {
-    errors.push({
-      msg: "Passwords do not match"
-    })
+    errors.push({msg: "Passwords do not match"})
   }
-  // check pass length 
-  // if(password.length < 6){errors.push({msg: "Password should be at least six characters"})}
-  // Console lot any errors 
-  if (errors.length > 0) {
-    (console.log(errors + "I want this to show on html to user"))
-    res.send(errors)
-  } else {
-    // Check DB for existing user
+  if(password.length < 1){errors.push({msg: "Password should be at least six characters"})}
+
+  // HERE WE GO 
+
+  // Check DB for existing user
     User.find({
         username: username
       })
       .then(user => {
         console.log(user)
-        if (user.length > 0) {
-          console.log('username already registered. I want this to show on screen')
-          res.json('user already registered');
+        if (user.length > 0) {errors.push({msg: "Username is already registered"})}
+
+        
+        if(errors.length > 0)
+        {
+          res.status(500).json(errors);
         }
+
         // Create new user 
         else {
           // I have a model and I am here creating a new instance
@@ -145,7 +139,7 @@ router.post('/register', (req, res) => {
           )
         }
       })
-  }
+  
   // END OF ROUTER POST TO SETUP ON REGISTRATION 
 });
 

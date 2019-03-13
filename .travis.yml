@@ -1,9 +1,0 @@
-language: node_js
-node_js: node
-deploy:
-  provider: heroku
-  api_key:
-    secure: 2J0DMxZ5Fp6NKlaNbKx0XC/xKtiVJr/jH1qF2kzD+THe9+cuvPjjsvoO8HLLZsrlBlkQXaxPZ/0bQYR2miEpLY4A0nB/8wPRzkKZ7kdXhQ7qT6n1kII3bZ/XZGUidj23qbtX+5uNXLezPK0RFcBsdsuDbUbAr3V19SI9oc7mmzSFbyzR+N2yQb9q4lnnaj5gZ7MW+9WQ08N0SRuv7kaLQdLkXtjkAx4IDymJ8KUcyptdqLA0YWHHK0PyQTSSD3sbRXXvCBiSVHfK+adtAgGz5tBwpyBbnskO4e/LK6gwzoe6s5MiWwTnreDjFfdUvETzjnC2ulFkSZnzDF/KRiRk0I0OuVsDjNefJQhTHrerGEufs3dRpgravF/3KSukG6QAjiW+hBYOOXGHEiJO962a9JBHBnEAVDMdj/uVXc6upljX7hrpTG93JcTTS8Jv1fOJJejtU8PWqQUhGQLQBmO/lQb+Q+zqTS7NNW/ccoqnT0XcvsRaPhqwFgP652SxaIe2/o/KGfGyzMwW8dD8i7Lya2QEmInycMJ6SmX1cfOX8fBhtkzAE3AWZq723OUzt4mbHpfXNQZpeLGnYzXcglmT1BlGV9QfW7zCSYSynCwrOOBUuRql+3sdlZIcJ/jImzVwb5ALGxTXW0Euw15jZoqhcsQG0E6FWpUC39TMCVO6JSQ=
-  app: afternoon-inlet-64355
-  on:
-    repo: AdamJDuggan/abacus

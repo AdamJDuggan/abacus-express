@@ -76,7 +76,6 @@ function removeExpensesRow(){
 function displayUser(){
 
     let token = localStorage.getItem('user');
-    console.log(token);
     
     let options = {
         method: 'POST',
@@ -89,7 +88,7 @@ function displayUser(){
 
     fetch('api/auth/dashboard', options)
             .then(response => {
-                console.log('Returned from server')
+                console.log('User account returned from server and displayed')
                 return response.json()
             })
             .then(user => {
@@ -229,11 +228,8 @@ function updateAccount(){
         let newMonthAdded = {};
         newMonthAdded["month"] = $('#newMonthMonth').val();
         newMonthAdded["amount"] = $('#newMonthAmount').val();
-        if (($('#newMonthMonth').val()).length == 0 || ($('#newMonthAmount').val()).length == 0 ){
-            console.log(monthly, 'not added');
-        }else{
+        if (!($('#newMonthMonth').val()).length == 0 || !($('#newMonthAmount').val()).length == 0 ){
             monthly.push(newMonthAdded);
-            console.log(monthly, 'should have addition');
         }
         
 
@@ -261,7 +257,7 @@ function updateAccount(){
                 return response.json()
             })
             .then(user => {
-                console.log('user updated successfully', user);
+                console.log('user updated successfully');
                 window.location.reload();
             }).catch(err => console.log('err updating user', err))
     })

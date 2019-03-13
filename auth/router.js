@@ -77,19 +77,8 @@ router.post('/refresh', jwtAuth, (req, res) => {
 router.post('/register', (req, res) => {
 
   console.log('infomation sent from reg form');
-  const {
-    username,
-    password,
-    password2,
-    income,
-    expenses,
-    budgetinggoal,
-    monthly
-  } = req.body;
-  console.log("Expenses", expenses);
-  console.log("Income", income);
-
-
+  const {username, password, password2, income, expenses, budgetinggoal, monthly} = req.body;
+ 
   // Validation
   let errors = [];
   //check requird fields
@@ -109,6 +98,7 @@ router.post('/register', (req, res) => {
   // Console lot any errors 
   if (errors.length > 0) {
     (console.log(errors + "I want this to show on html to user"))
+    res.send(errors)
   } else {
     // Check DB for existing user
     User.find({

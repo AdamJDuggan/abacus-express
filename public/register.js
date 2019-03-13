@@ -116,6 +116,8 @@ function register(){
 
         }
 
+        $('#errorMsg').append(`${errors}`);
+
         fetch('api/auth/register', options)
             .then(response => {
                 console.log('Returned from server')

@@ -68,12 +68,16 @@ router.post('/refresh', jwtAuth, (req, res) => {
 // Registration form submit: validate, and if no user then push new user to db
 //---------------------------------------------------------------
 router.post('/register', (req, res) => {
-
+  
+  // Confirm data sent from reg form 
   console.log('Infomation sent from reg form');
+  
+  // Get user data from reg form
   const {username, password, password2, income, expenses, budgetinggoal, monthly} = req.body;
  
-  // Validation
+  // VALIDATION 
   let errors = [];
+
   //check requird fields
   if (!username || !password || !password2) {
     errors.push({msg: 'Please fill in all fields'});
@@ -82,36 +86,26 @@ router.post('/register', (req, res) => {
   if (password !== password2) {
     errors.push({msg: "Passwords do not match"})
   }
+  // check password length: update this to 6 characters before going to production
   if(password.length < 1){errors.push({msg: "Password should be at least six characters"})}
-
-  // HERE WE GO 
 
   // Check DB for existing user
     User.find({
         username: username
       })
       .then(user => {
-        console.log('Shape of user object sent over:', user)
+        // Check if 
         if (user.length > 0) {errors.push({msg: "Username is already registered"})}
+        })
+        // HERE WE GO!!!
+        .then(user => {
+          // SEND BACK HERE IF ERRORS 
+          if(errors.length > 0){res.status(500).json(errors);}
 
-        
-        if(errors.length > 0)
-        {
-          res.status(500).json(errors);
-        }
-
-        // Create new user 
-        else {
-          // I have a model and I am here creating a new instance
-          // HERE
-          const newUser = new User({
-            username,
-            password,
-            income,
-            expenses,
-            budgetinggoal,
-            monthly
-          });
+          // Create new user 
+          else {
+          // I have a model and I am here creating a new instance of user
+          const newUser = new User({username, password, income, expenses, budgetinggoal,monthly});
           // Hash password before saving to DB. Generate a salt so we can create a hash 
           //takes number of keys as argument
           bcrypt.genSalt(10, (err, salt) =>
@@ -131,16 +125,18 @@ router.post('/register', (req, res) => {
               })
             })
           )
-        }
-      })
+          }
+        })
+
   
-  // END OF ROUTER POST TO SETUP ON REGISTRATION 
+// END OF ROUTER POST TO SETUP ON REGISTRATION 
 });
 
 
 
+
 //---------------------------------------------------------------
-// Dashboard: Get user data to dispaly account to view 
+// Dashboard: Get user data to dispaly account to view on page load 
 //---------------------------------------------------------------
 router.post('/dashboard', tokenValidator.validateToken, (req, res) => {
   const {
@@ -161,7 +157,7 @@ router.post('/dashboard', tokenValidator.validateToken, (req, res) => {
 
 
 //---------------------------------------------------------------
-// Update: Update user account after user changes their account settings 
+// Update: Update user account after user changes their account settings: WORKING 
 //---------------------------------------------------------------
 router.put('/update', tokenValidator.validateToken, (req, res) => {
 
@@ -185,7 +181,7 @@ router.put('/update', tokenValidator.validateToken, (req, res) => {
 
 
 //---------------------------------------------------------------
-// Delete: Delete user account
+// Delete: Delete user account: WORKING 
 //---------------------------------------------------------------
 router.delete('/delete', tokenValidator.validateToken, (req, res) => {
 
@@ -203,7 +199,6 @@ router.delete('/delete', tokenValidator.validateToken, (req, res) => {
       console.log('error on delete account', err);
       res.send(err)
       });
- 
 })
 
 

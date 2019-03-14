@@ -59,8 +59,9 @@ function removeRowFromSetupExpensesTable(){
 
 // HOME BUTTON AT TOP
 function goHome(){
-    $('#home').on('click', () => {
+    $('#home').on('click', e => {
         e.preventDefault();
+        localStorage.clear();   
         window.location = 'index.html';
     })
 }

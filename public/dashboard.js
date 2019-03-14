@@ -28,7 +28,7 @@ function addRowToIncome(){
     })
 }
 
-// ADD ROW TO SETUP ACCOUNT EXPENSES TABLE 
+// ADD ROW TO SETUP ACCOUNT EXPENSES TABLE: WORKING
 function addRowToExpense(){
     $('#addExpenseTableRowBtn').on('click', event => {
         event.preventDefault();
@@ -53,7 +53,7 @@ function addRowToExpense(){
     })
 }
 
-// REMOVE ROW FROM INCOME TABLE
+// REMOVE ROW FROM INCOME TABLE: WORKING
 function removeIncomeRow(){
     $('#removeIncomeTableRowBtn').on('click', function () {
         event.preventDefault(); 
@@ -63,7 +63,7 @@ function removeIncomeRow(){
     });
 };
 
-// REMOVE ROW FROM EXPENSES TABLE
+// REMOVE ROW FROM EXPENSES TABLE: WORKING
 function removeExpensesRow(){
     $('#removeExpenseTableRowBtn').on('click', function () {
         event.preventDefault(); 
@@ -73,7 +73,7 @@ function removeExpensesRow(){
     });
 };
 
-// DISPLAY CONFIRM DELETE ACCOUNT SECTION
+// DISPLAY CONFIRM DELETE ACCOUNT SECTION: WORKING 
 function displayDeleteAccountBtn(){
     $('#deleteAccountBtn').on('click', e => {
         e.preventDefault();
@@ -81,7 +81,7 @@ function displayDeleteAccountBtn(){
     })
 }
 
-// 'NO' AND HIDE DELETE ACCOUNT SECTION
+// 'NO' AND HIDE DELETE ACCOUNT SECTION: WORKING 
 function noDontDeleteAccountBtn(){
     $('#noDontDeleteMyAccountBtn').on('click', e => {
         e.preventDefault();
@@ -89,7 +89,7 @@ function noDontDeleteAccountBtn(){
     })
 }
 
-// 'YES' DELETE USER ACCOUNT 
+// 'YES' DELETE USER ACCOUNT: WORKING  
 function yesDeleteMyAccountBtn(){
     $('#yesDeleteMyAccountBtn').on('click', e => {
         e.preventDefault();
@@ -119,7 +119,7 @@ function yesDeleteMyAccountBtn(){
 
 
 
-// POPULATE PAGE WITH USER ACCOUNT
+// POPULATE PAGE WITH USER ACCOUNT: WORKING
 function displayUser(){
 
     let token = localStorage.getItem('user');
@@ -237,7 +237,7 @@ function displayUser(){
 }
 
 
-// UPDATE ACCOUNT  
+// UPDATE ACCOUNT: WORKING 
 function updateAccount(){
     $('#updateAccountBtn').on('click', e => {
         e.preventDefault();

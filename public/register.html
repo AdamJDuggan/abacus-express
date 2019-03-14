@@ -26,7 +26,7 @@
 </section>
 
 <!-- INCOME< EXP AND CALCUALTE BTN TO HIDE -->
-<section  id="hideIncExpAndCalcBtn" class="hero is-light is-bold">
+<form id="regForm" class="hero is-light is-bold">
 <div class="hero-body">
 <div class="container">
 
@@ -40,7 +40,7 @@
 <div class="field">
 <label class="label">Email</label>
 <div class="control has-icons-left ">
-<input required class="input" type="email" id="registerEmail" placeholder="Enter your email address as a username ">
+<input required class="input allInputs" type="email" id="registerEmail" placeholder="Enter your email address as a username ">
 <span class="icon is-small is-left">
 <i class="fas fa-user"></i>
 </span>
@@ -49,7 +49,7 @@
 <div class="field">
 <label class="label">Password</label>
 <div class="control has-icons-left has-icons-right">
-<input required class="input" type="password" id="registerPassword" placeholder="Enter your password">
+<input required class="input allInputs" type="password" id="registerPassword" placeholder="Enter your password">
 <span class="icon is-small is-left">
 <i class="fas fa-lock"></i></span>
 </div>
@@ -57,7 +57,7 @@
 <div class="field">
 <label class="label">Confirm password</label>
 <div class="control has-icons-left has-icons-right">
-<input required class="input" type="password" id="registerPassword2" placeholder="">
+<input required class="input allInputs" type="password" id="registerPassword2" placeholder="">
 <span class="icon is-small is-left">
 <i class="fas fa-lock"></i></span>
 </div>
@@ -83,10 +83,10 @@ monthly income</h1>
 <div class="field has-addons">
 <p class="control"></p><a
 class="button is-static">Source</a></p>
-<p class="control"><input required class="input incomeSource" type="text"></p>
+<p class="control"><input required class="input incomeSource allInputs" type="text"></p>
 <p class="control"><a
 class="button is-static">Amount</a></p>
-<p class="control"><input required class="input incomeAmount" type="number"></p>
+<p class="control"><input required class="input incomeAmount allInputs" type="number"></p>
 </div>
 </div>
 </form>
@@ -125,9 +125,9 @@ regular/essential monthly expenses</h1>
 <div class="field has-addons">
 <p class="control"><a
 class="button is-static">Source</a></p>
-<p class="control"><input required class="input expenseSource" type="text"></p>
+<p class="control"><input required class="input expenseSource allInputs" type="text"></p>
 <p class="control"><a class="button is-static">Amount</a></p>
-<p class="control"><input required class="input expenseAmount" type="number"></p>
+<p class="control"><input required class="input expenseAmount allInputs" type="number"></p>
 </div>
 </div>
 </form>
@@ -163,7 +163,7 @@ ROW</p><br>
 each month?</h2>
 <div class="field">
 <div class="control has-icons-left">
-<input id="budgetGoalInput" required class="input is-large" type="number" placeholder="Per month">
+<input id="budgetGoalInput" required class="input allInputs" type="number" placeholder="Per month">
 <span class="icon is-left">
 <i class="far fa-money-bill-alt"></i>
 </span>
@@ -179,21 +179,20 @@ each month?</h2>
 <div class="container">
 <h1 id="loginBudgetGoalheading" class="title">5. Enter last months dispendable outgoings</h1>
 <h2 id="loginBudgetGoalSubHeading" class="subtitle">Add up all your non-essential spending from the last calendar month</h2>
-<form id="monthRow">
-
+<section id="monthRow">
 <div class="field">
 <label class="label has-text-white">Month</label>
 <div class="control">
-<input class=" input addMonthMonth"  type="text" placeholder="Apr 19">
+<input required class="input addMonthMonth allInputs"  type="text" placeholder="Apr 19">
 </div>
 </div>
 <div class="field">
 <label class="label has-text-white">Total non-essential spending</label>
 <div class="control">
-<input class="input addMonthAmount"  type="number" placeholder="£">
+<input required class="input addMonthAmount allInputs"  type="number" placeholder="£">
 </div>
 </div>
-</form>
+</section>
 
 </div>
 </div>
@@ -201,22 +200,26 @@ each month?</h2>
 
 
 
-<div id="errorMsg" class="container"></div>
 
 
-<!-- CALCULATE BUTTON -->
+<!-- CREATE ACCOUNT BUTTON -->
 <section class="hero">
 <div class="hero-body">
 <div class="container">
-<div id="errorMsg"></div>
-<a id="regAndCalculateBtn" class="button is-large is-info has-text-weight-bold">Create Account</a>
-</div>
-</div>
-</section>
+    <p hidden id="regAllFieldsVal" class="help is-danger has-text-danger is-size-5">Please fill in all fields</p>
+    
+    <p class="help has-text-danger is-size-5" id="serverErrorMsg"></p>
+
+    <a id="regAndCalculateBtn" action="submit" class="button is-large is-info has-text-weight-bold">Create Account</a>
 
 </div>
 </div>
-</section>
+</section>  
+
+
+</div>
+</div>
+</form>
 
 
 <!-- FOOTER -->

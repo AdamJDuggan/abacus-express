@@ -70,6 +70,7 @@ function goHome(){
 // Click to register an account and push income and exp to db
 function register(){
     $('#regAndCalculateBtn').on('click', function (e) {
+
         e.preventDefault();
          // User income, expenses and first month to be turned into objects to send to db
          let income = [];   
@@ -106,7 +107,13 @@ function register(){
              budgetinggoal: $('#budgetGoalInput').val(),
              monthly: monthly
          }
+         let inputCount = 0;
+         $(".allInputs").map(function(){  
+            if( !$(this).val() ) {inputCount += 1}
+         });
+         if(inputCount > 10){$('#regAllFieldsVal').show()}
          
+         else{ 
 
         //  FETCH TO SERVER
         let options = {
@@ -124,14 +131,18 @@ function register(){
             })
             .then(user => {
                 localStorage.setItem("user", user.authToken);
-                window.location = 'dashboard.html';                
+                // window.location = 'dashboard.html'; 
+                console.log('window.location to dashboard happens here');               
             })
             .catch(err => {
                 console.error('Error:', err)
-                $('#errorMsg').toggle();
+                // This field is the one which validates on client side- all fields required. Now hide to repalce with...
+                $('#regAllFieldsVal').hide()
+                // Display returned error message from server in regValidationServer div
+                $('#serverErrorMsg').html(`${err}`);
             })
 
-
+        }
     })
 }
 

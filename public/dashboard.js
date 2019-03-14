@@ -73,6 +73,49 @@ function removeExpensesRow(){
     });
 };
 
+// DISPLAY CONFIRM DELETE ACCOUNT SECTION
+function displayDeleteAccountBtn(){
+    $('#deleteAccountBtn').on('click', e => {
+        e.preventDefault();
+        $('#confirmDeleteSection').show();
+    })
+}
+
+// 'NO' AND HIDE DELETE ACCOUNT SECTION
+function noDontDeleteAccountBtn(){
+    $('#noDontDeleteMyAccountBtn').on('click', e => {
+        e.preventDefault();
+        $('#confirmDeleteSection').hide();
+    })
+}
+
+// 'YES' DELETE USER ACCOUNT 
+function yesDeleteMyAccountBtn(){
+    $('#yesDeleteMyAccountBtn').on('click', e => {
+        e.preventDefault();
+        let token = localStorage.getItem('user');
+    
+        let options = {
+            method: 'DELETE',
+            headers: {
+            "Content-Type": 'application/json',
+            Authorization: token
+        },
+        body: JSON.stringify({ })
+    }
+
+    fetch('api/auth/delete', options)
+            .then(response => {
+                console.log('User account returned from server and displayed')
+                return response.json()
+            })
+            .then(user => {
+                console.log('user deleted successfully');
+                window.location='index.html';
+            })
+            .catch(err => console.log('err deleting user', err))
+    })
+}
 
 
 
@@ -173,13 +216,13 @@ function displayUser(){
                 <div class="level-item has-text-centered has-text-white">
                 <div>
                 <p class="heading">Month</p>
-                <input class="title has-text-centered has-background-info addMonthMonth" value="${x.month}" readonly>
+                <input class="title has-text-centered has-background-info addMonthMonth dashMonthLog" value="${x.month}" readonly>
                 </div>
                 </div>
                 <div class="level-item has-text-centered">
                 <div>
                 <p class="heading">Non-essential spending</p>
-                <input class="title has-text-centered has-background-info addMonthAmount" value="${x.amount}" readonly>
+                <input class="title has-text-centered has-background-info addMonthAmount dashMonthLog" value="${x.amount}" readonly>
                 </div>
                 </div>
                 </nav>
@@ -192,7 +235,6 @@ function displayUser(){
                 $('#errorMsg').toggle();
             });
 }
-
 
 
 // UPDATE ACCOUNT  
@@ -263,7 +305,8 @@ function updateAccount(){
             .then(user => {
                 console.log('user updated successfully');
                 window.location.reload();
-            }).catch(err => console.log('err updating user', err))
+            })
+            .catch(err => console.log('err updating user', err))
     })
 }
 
@@ -277,7 +320,6 @@ function logout(){
 }
 
 
-
 // WRAPPER FOR ALL ABOVE STYLE DISPLAY TOGGLES 
 function dashboardWrapperFunction(){ 
     addRowToIncome();
@@ -285,6 +327,9 @@ function dashboardWrapperFunction(){
     removeIncomeRow();
     removeExpensesRow();
     updateAccount();
+    displayDeleteAccountBtn();
+    yesDeleteMyAccountBtn();
+    noDontDeleteAccountBtn();
     logout();
    
 }

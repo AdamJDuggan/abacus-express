@@ -37,16 +37,12 @@ router.use(bodyParser.json());
 // Login The user provides a username and password to login
 //-----------------------------------------------------
 router.post('/login', localAuth, (req, res) => {
-  const {
-    username,
-    password
-  } = req.body;
-  console.log(username, password, '@"adfadf@')
+  const {username, password} = req.body;
+
   User.find({
       username: username
     })
     .then(user => {
-      console.log(user)
       const authToken = createAuthToken(username);
       const payload = {
         authToken
@@ -73,7 +69,7 @@ router.post('/refresh', jwtAuth, (req, res) => {
 //---------------------------------------------------------------
 router.post('/register', (req, res) => {
 
-  console.log('infomation sent from reg form');
+  console.log('Infomation sent from reg form');
   const {username, password, password2, income, expenses, budgetinggoal, monthly} = req.body;
  
   // Validation
@@ -95,7 +91,7 @@ router.post('/register', (req, res) => {
         username: username
       })
       .then(user => {
-        console.log(user)
+        console.log('Shape of user object sent over:', user)
         if (user.length > 0) {errors.push({msg: "Username is already registered"})}
 
         
@@ -130,10 +126,8 @@ router.post('/register', (req, res) => {
                 } else {
                   console.log('User added to db')
                   const authToken = createAuthToken(newUser.username);
-                  res.json({
-                    authToken
-                  });
-                }
+                  res.json({authToken});
+                  }
               })
             })
           )
@@ -167,21 +161,18 @@ router.post('/dashboard', tokenValidator.validateToken, (req, res) => {
 
 
 //---------------------------------------------------------------
-// Update: 
+// Update: Update user account after user changes their account settings 
 //---------------------------------------------------------------
 router.put('/update', tokenValidator.validateToken, (req, res) => {
 
-  console.log('came from dashboard', req.headers);
-  console.log('came from dashboardttttt', req.body);
+  console.log('req.headers:', req.headers);
+  console.log('req.body:', req.body);
 
   let payload = req.decoded;
-  //console.log(req.body);
   let username = payload.user
-  //console.log(username, payload, "here");
   User.findOneAndUpdate({
       username: username
     }, req.body)
-    // User.findByIdAndUpdate('5c8686b47a0c4a678b7e80ef', {budgetinggoal: 200})
     .then(result => {
       console.log('successfullherey updated', result);
       res.send(result);
@@ -189,20 +180,31 @@ router.put('/update', tokenValidator.validateToken, (req, res) => {
       console.log('errrrrr', err);
       res.send(err)
       });
- /* User.findOne({
-      username: username
-    }).select("-password")
-
-    .then(user => {
-      console.log(user.income + "ok")
-
-      res.json('back from server. User object to go here then window reload');
-    });
-    */
+ 
 })
 
 
+//---------------------------------------------------------------
+// Delete: Delete user account
+//---------------------------------------------------------------
+router.delete('/delete', tokenValidator.validateToken, (req, res) => {
 
+  console.log('req.headers:', req.headers);
+
+  let payload = req.decoded;
+  let username = payload.user
+  User.findOneAndRemove({
+      username: username
+    })
+    .then(result => {
+      console.log('successfully deleted', result);
+      res.send(result);
+    }).catch(err => {
+      console.log('error on delete account', err);
+      res.send(err)
+      });
+ 
+})
 
 
 

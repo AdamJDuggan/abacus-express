@@ -79,10 +79,21 @@ input{max-width: 200px;}
 
 #budgetAmount{border: 1px solid white; margin: 10px; padding: 10px; border-radius: 10%;}
 
-#errorMsg{display: none; margin-bottom: 20px;}
+#errorMsg,
+#regAllFieldsVal{
+    display: none; margin-bottom: 20px; color: red;
+}
 
 #addMonthForm{margin-top: 70px;}
 
-.addMonthMonth,
-.addMonthAmount{border: none; padding: 5px; height: 40px;};
+#regAndCalculateBtn{margin-top: 20px;}
 
+.dashMonthLog{
+    border: none;
+}
+
+#updateAccountBtn{margin-bottom: 50px;}
+
+#confirmDeleteSection{display: none;}
+
+#yesDeleteMyAccountBtn{margin-right: 25px;}
